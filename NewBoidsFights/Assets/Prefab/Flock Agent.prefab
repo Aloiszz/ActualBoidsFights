@@ -177,7 +177,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canon1: {fileID: 816434222012362555}
   canon2: {fileID: 816434221066111539}
-  ammo: {fileID: 0}
+  ammo: {fileID: 8106224990919001895, guid: 5263c0061305dcc4c99e77d9ede7982d, type: 3}
   RayDistance: 10
   engagementDistance: 25
   canEngageAuto: 1

@@ -200,8 +200,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_LocalRotation: {x: 0.2328932, y: -0.67133355, z: 0.23579958, w: 0.6629259}
-  m_LocalPosition: {x: 39.89444, y: 77.98757, z: 20.448284}
+  m_LocalRotation: {x: 0.6851321, y: -0.005263478, z: 0.0049211457, w: 0.72838324}
+  m_LocalPosition: {x: -4.3129077, y: 221.32535, z: 7.1835384}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -532,8 +532,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flock: {fileID: 3429564234414965306, guid: 4681877deea41254a986cedf2edfc20b, type: 3}
-  howManyAlliesFlocks: 1
-  howManyEnnemiFlocks: 1
+  howManyAlliesFlocks: 2
+  howManyEnnemiFlocks: 2
   WhereToSpawns: []
   count: 0
   countLocation: 0

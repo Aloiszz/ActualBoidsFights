@@ -68,7 +68,11 @@ public class FlockAgent : MonoBehaviour
                 if (isAttacking)
                 {
                     Debug.DrawRay(ray.origin, ray.direction * RayDistance , Color.green);
-                    Attacking();
+                    //Destroy(hitData.transform.gameObject);
+                    hitData.transform.gameObject.SetActive(false);
+                    Debug.LogWarning(hitData.transform.name + " Was Killed by " + transform.name);
+                    //isAttacking = false;
+                    //Attacking();
                 }
                 
             }
