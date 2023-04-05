@@ -159,8 +159,8 @@ Camera:
   m_GameObject: {fileID: 330585543}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -200,8 +200,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_LocalRotation: {x: -0.21533935, y: 0.6613359, z: -0.20697615, w: -0.68805873}
-  m_LocalPosition: {x: 98.74031, y: 95.76156, z: -0.5646801}
+  m_LocalRotation: {x: 0.2328932, y: -0.67133355, z: 0.23579958, w: 0.6629259}
+  m_LocalPosition: {x: 39.89444, y: 77.98757, z: 20.448284}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -531,8 +531,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fafdb7eeca1bd8d4c9eddf3c4f75eb7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flock: {fileID: 0}
-  howManyAlliesFlocks: 0
+  flock: {fileID: 3429564234414965306, guid: 4681877deea41254a986cedf2edfc20b, type: 3}
+  howManyAlliesFlocks: 1
   howManyEnnemiFlocks: 0
   WhereToSpawns: []
   count: 0

@@ -65,21 +65,21 @@ public class Flock : MonoBehaviour
 
     void Secure_SO()
     {
-        
+        centerRadius = radiusBehavior.center;
         if (isUnitEnnemy)
         {
             centerRadius = FlockManager.instance.WhereToSpawnsEnnemis[FlockManager.instance.countLocationEnnemy];
-            radiusBehavior.center = new Vector3(0, 0, 50);
+            //radiusBehavior.center = new Vector3(0, 0, 50);
         }
         else
         {
             centerRadius = FlockManager.instance.WhereToSpawns[FlockManager.instance.countLocation];
-            radiusBehavior.center = new Vector3(0, 0, 0);
+            //radiusBehavior.center = new Vector3(0, 0, 0);
         }
         
         radius = radiusBehavior.radius;
         
-        //centerRadius = radiusBehavior.center;
+        
     }
 
     

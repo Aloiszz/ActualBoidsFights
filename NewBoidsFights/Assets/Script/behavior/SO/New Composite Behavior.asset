@@ -13,12 +13,10 @@ MonoBehaviour:
   m_Name: New Composite Behavior
   m_EditorClassIdentifier: 
   behaviors:
+  - {fileID: 11400000, guid: 4fc7d3667ee20b741b40be999b20dfba, type: 2}
   - {fileID: 11400000, guid: 6ca4780f179d25b4fb0f3ca63795e159, type: 2}
   - {fileID: 11400000, guid: 8c5240ee37c5f6a4a97a209d82d14202, type: 2}
-  - {fileID: 11400000, guid: fef868da87968984a992107a6d99ef58, type: 2}
-  - {fileID: 11400000, guid: 4fc7d3667ee20b741b40be999b20dfba, type: 2}
   weights:
-  - 0
-  - 0
-  - 0
-  - 0
+  - 5
+  - 1
+  - 1

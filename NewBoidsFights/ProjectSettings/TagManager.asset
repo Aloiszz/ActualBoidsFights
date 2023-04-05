@@ -5,11 +5,13 @@ TagManager:
   serializedVersion: 2
   tags:
   - Terrain
+  - Flock
+  - SphereIndication
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Flock
   - Water
   - UI
   - 

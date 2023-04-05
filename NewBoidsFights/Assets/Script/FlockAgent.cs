@@ -44,7 +44,7 @@ public class FlockAgent : MonoBehaviour
     {
         Ray ray = new Ray(transform.position, transform.forward);
 
-        /*if (!isEnnemy)
+        if (!isEnnemy)
         {
             //Debug.DrawLine(transform.position, vise.transform.position, Color.cyan);
             Debug.DrawRay(ray.origin, ray.direction * RayDistance, Color.cyan);
@@ -53,7 +53,7 @@ public class FlockAgent : MonoBehaviour
         {
             //Debug.DrawLine(transform.position, vise.transform.position, Color.red);
             Debug.DrawRay(ray.origin, ray.direction * RayDistance , Color.red);
-        }*/
+        }
         
         RaycastHit hitData;
         if (Physics.Raycast(ray, out hitData, RayDistance))
