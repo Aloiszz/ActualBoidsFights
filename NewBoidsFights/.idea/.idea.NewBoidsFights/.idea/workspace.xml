@@ -8,6 +8,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/../../Caverne-Merveilleuse/CarverneMerveilleuse/Assets/Script/Camera/CinemachineShake.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../Unity Project/BoidsFights/Assets/CustomEditorWindow/Editor/CompositeBehaviorEditor.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -69,7 +70,8 @@
       <workItem from="1680524479576" duration="702000" />
       <workItem from="1680528659673" duration="1241000" />
       <workItem from="1680611657629" duration="1649000" />
-      <workItem from="1680683798951" duration="1215000" />
+      <workItem from="1680683798951" duration="6479000" />
+      <workItem from="1680697990434" duration="1278000" />
     </task>
     <servers />
   </component>

@@ -212,17 +212,15 @@ MonoBehaviour:
     type: 3}
   behavior: {fileID: 11400000, guid: 2c7788aedc599964ab860d5cd48232d6, type: 2}
   radiusBehavior: {fileID: 11400000, guid: 07b9bb68e0e6fe64caa48e7c95ec7fbe, type: 2}
-  startingCount: 225
+  startingCount: 20
   AgentDensity: 0.01
   driveFactor: 10
-  maxSpeed: 12
+  maxSpeed: 20
   neighborRadius: 1.5
   avoidanceRadiusMultiplier: 0.5
   isCombat: 0
   isMoving: 0
   isWaiting: 0
-  engagementDistance: 50
-  canEngageAuto: 0
   isUnitSelected: 0
   isUnitEnnemy: 0
   isUnitShooting: 0

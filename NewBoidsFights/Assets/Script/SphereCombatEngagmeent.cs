@@ -6,33 +6,36 @@ using UnityEngine;
 public class SphereCombatEngagmeent : MonoBehaviour
 {
 
-    [SerializeField] private int rangeSphere;
-
+    private int rangeSphere;
+    [SerializeField] private SphereCollider sphere;
 
     private void Start()
     {
-        rangeSphere = GetComponentInParent<Flock>().engagementDistance;
-        GetComponent<SphereCollider>().radius = rangeSphere;
+        rangeSphere = GetComponentInParent<FlockAgent>().engagementDistance;
+        sphere.radius = rangeSphere;
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Flock") && GetComponentInParent<Flock>().canEngageAuto) // Permet de verifier si unit attaque ou non 
+        if (other.CompareTag("FlockAgent") && GetComponentInParent<FlockAgent>().canEngageAuto) // Permet de verifier si unit attaque ou non 
         {
-            if (other.GetComponentInParent<Flock>().isUnitEnnemy)
+            
+            if (other.GetComponentInParent<FlockAgent>().isEnnemy)
             {
-                GetComponentInParent<Flock>().isCombat = true;
+                GetComponentInParent<FlockAgent>().isAttacking = true;
+                
             }
 
-            if (GetComponentInParent<Flock>().isUnitEnnemy)
+            if (GetComponentInParent<FlockAgent>().isEnnemy)
             {
-                if (other.GetComponentInParent<Flock>().isUnitEnnemy)
+                if (other.GetComponentInParent<FlockAgent>().isEnnemy)
                 {
-                    GetComponentInParent<Flock>().isCombat = false;
+                    GetComponentInParent<FlockAgent>().isAttacking = false;
                 }
                 else
                 {
-                    GetComponentInParent<Flock>().isCombat = true;
+                    GetComponentInParent<FlockAgent>().isAttacking = true;
+                    Debug.Log(other.name);
                 }
             }
         }
@@ -41,16 +44,16 @@ public class SphereCombatEngagmeent : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Flock")) // si flock et si ennemy alors attaque
+        if (other.CompareTag("FlockAgent")) // si flock et si ennemy alors attaque
         {
-            if (other.GetComponentInParent<Flock>().isUnitEnnemy)
+            if (other.GetComponentInParent<FlockAgent>().isEnnemy)
             {
-                GetComponentInParent<Flock>().isCombat = false;
+                GetComponentInParent<FlockAgent>().isAttacking = false;
             }
 
-            if (!other.GetComponentInParent<Flock>().isUnitEnnemy)
+            if (!other.GetComponentInParent<FlockAgent>().isEnnemy)
             {
-                GetComponentInParent<Flock>().isCombat = false;
+                GetComponentInParent<FlockAgent>().isAttacking = false;
             }
         }
     }

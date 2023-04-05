@@ -36,11 +36,6 @@ public class Flock : MonoBehaviour
     public bool isCombat;
     public bool isMoving;
     public bool isWaiting;
-
-    
-    [Header("Information about Combat")] 
-    public int engagementDistance = 50; // distance d'engagement requise pour attaquer une flock ennemy
-    public bool canEngageAuto; // permet d'engager les flocks ennemy can entre dans la range
     
     
     [Header("Information about flock")]
@@ -69,6 +64,7 @@ public class Flock : MonoBehaviour
         if (isUnitEnnemy)
         {
             centerRadius = FlockManager.instance.WhereToSpawnsEnnemis[FlockManager.instance.countLocationEnnemy];
+            //gameObject.layer = 2;
             //radiusBehavior.center = new Vector3(0, 0, 50);
         }
         else
@@ -246,7 +242,7 @@ public class Flock : MonoBehaviour
             }
             agent.Move(move);
 
-            Combat();
+            //Combat();
 
         }
         

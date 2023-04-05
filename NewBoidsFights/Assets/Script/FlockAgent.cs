@@ -8,7 +8,7 @@ using UnityEngine.Rendering;
 [RequireComponent(typeof(Collider))]
 public class FlockAgent : MonoBehaviour
 {
-    public GameObject vise;
+    //public GameObject vise;
     // Récupération des Flocks Collider
     private Collider agentCollider;
 
@@ -17,6 +17,11 @@ public class FlockAgent : MonoBehaviour
     [SerializeField] private GameObject ammo;
     [SerializeField] private float RayDistance = 10;
     
+    [Header("Information about Combat")] 
+    public int engagementDistance = 50; // distance d'engagement requise pour attaquer une flock ennemy
+    public bool canEngageAuto; // permet d'engager les flocks ennemy can entre dans la range
+    
+    [Space]
     public bool isEnnemy;
     public bool isAttacking;
     private bool isShooting;
@@ -58,7 +63,7 @@ public class FlockAgent : MonoBehaviour
         RaycastHit hitData;
         if (Physics.Raycast(ray, out hitData, RayDistance))
         {
-            if (hitData.collider.CompareTag("Flock"))
+            if (hitData.collider.CompareTag("FlockAgent"))
             {
                 if (isAttacking)
                 {
