@@ -35,7 +35,6 @@ public class SphereCombatEngagmeent : MonoBehaviour
                 else
                 {
                     GetComponentInParent<FlockAgent>().isAttacking = true;
-                    Debug.Log(other.name);
                 }
             }
         }

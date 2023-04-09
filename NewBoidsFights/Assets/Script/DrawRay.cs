@@ -8,6 +8,9 @@ public class DrawRay : MonoBehaviour
 
     public GameObject flock;
     public GameObject[] flocks;
+    
+    private RaycastHit hit;
+    private Ray ray;
 
     private bool isFlockEmpty;
     
@@ -41,88 +44,102 @@ public class DrawRay : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
+            ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            
             if (Physics.Raycast(ray, out hit, 10000))
             {
-                if (hit.collider.CompareTag("Terrain")) // Unit Selected and moving toward position
+                WhenNoUnitIsSelected();
+
+                /*if (flock == null)
                 {
-                    Debug.DrawRay(ray.origin - new Vector3(0,-1,0) , ray.direction * 10000, Color.green, 1, false);
-                    flock.transform.gameObject.GetComponent<Flock>().centerRadius = new Vector3(hit.point.x, 0, hit.point.z); // Radius limite de la flock
-                    flock.transform.transform.position = flock.transform.gameObject.GetComponent<Flock>().centerRadius;
-                }
-                
-                if (hit.transform.gameObject.GetComponent<Flock>().isUnitSelected)
-                {
-                    if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Flock")) // Unit UnSelected
-                    {
-                        hit.transform.gameObject.GetComponent<Flock>().isUnitSelected = false;
-                        flock = null;
-                        isFlockEmpty = false;
-                        Debug.DrawRay(ray.origin  - new Vector3(0,-1,0), ray.direction * 10000, Color.blue, 1, false);
-                        
-                        hit.transform.gameObject.GetComponent<Flock>().colorSelection.a = 0.05f;
-                        hit.transform.transform.GetChild(0).GetComponentInChildren<Renderer>().material.color = hit.transform.gameObject.GetComponent<Flock>().colorSelection;
-                    }
+                    
                 }
                 else
                 {
-                    if ( hit.transform.gameObject.layer == LayerMask.NameToLayer("Flock")) // Unit Selected
-                    {
-                        hit.transform.gameObject.GetComponent<Flock>().isUnitSelected = true;
-                        flock = hit.transform.gameObject;
-                        Debug.DrawRay(ray.origin  - new Vector3(0,-1,0), ray.direction * 10000, Color.blue, 1, false);
-                        
-                        hit.transform.gameObject.GetComponent<Flock>().colorSelection.a = 0.2f;
-                        hit.transform.transform.GetChild(0).GetComponentInChildren<Renderer>().material.color = hit.transform.gameObject.GetComponent<Flock>().colorSelection;
-                    }
-                    else // No Unit Selected
-                    {
-                        Debug.DrawRay(ray.origin  - new Vector3(0,-1,0), ray.direction * 10000, Color.red, 1, false);
-                        hit.transform.transform.GetChild(0).GetComponentInChildren<Renderer>().material.color = hit.transform.gameObject.GetComponent<Flock>().colorSelection;
-                    }
-                    
+                    WhenAUnitIsSelected();
                 }
+                */
                 
-                
-                /*if (flock != null)
-                {
-                    isFlockEmpty = true;
-                    
-                    if (hit.transform.gameObject.GetComponent<Flock>().isUnitSelected)
-                    {
-                        if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Flock")) // Unit UnSelected
-                        {
-                            hit.transform.gameObject.GetComponent<Flock>().isUnitSelected = false;
-                            flock = null;
-                            isFlockEmpty = false;
-                            Debug.DrawRay(ray.origin  - new Vector3(0,-1,0), ray.direction * 10000, Color.blue, 1, false);
-                            
-                            hit.transform.gameObject.GetComponent<Flock>().colorSelection.a = 0.05f;
-                            hit.transform.transform.GetChild(0).GetComponentInChildren<Renderer>().material.color = hit.transform.gameObject.GetComponent<Flock>().colorSelection;
-                        }
-                    }
-                    else
-                    {
-                        if ( hit.transform.gameObject.layer == LayerMask.NameToLayer("Flock")) // Unit Selected
-                        {
-                            hit.transform.gameObject.GetComponent<Flock>().isUnitSelected = true;
-                            flock = hit.transform.gameObject;
-                            Debug.DrawRay(ray.origin  - new Vector3(0,-1,0), ray.direction * 10000, Color.blue, 1, false);
-                            
-                            hit.transform.gameObject.GetComponent<Flock>().colorSelection.a = 0.2f;
-                            hit.transform.transform.GetChild(0).GetComponentInChildren<Renderer>().material.color = hit.transform.gameObject.GetComponent<Flock>().colorSelection;
-                        }
-                        else // No Unit Selected
-                        {
-                            Debug.DrawRay(ray.origin  - new Vector3(0,-1,0), ray.direction * 10000, Color.red, 1, false);
-                            hit.transform.transform.GetChild(0).GetComponentInChildren<Renderer>().material.color = hit.transform.gameObject.GetComponent<Flock>().colorSelection;
-                        }
-                        
-                    }
-            
-                }*/
             }
+        }
+    }
+
+    void WhenNoUnitIsSelected()
+    {
+        if (hit.collider.CompareTag("Terrain")) // Unit Selected and moving toward position
+        {
+            Debug.DrawRay(ray.origin - new Vector3(0,-1,0) , ray.direction * 10000, Color.green, 1, false);
+            flock.transform.gameObject.GetComponent<Flock>().centerRadius = new Vector3(hit.point.x, 0, hit.point.z); // Radius limite de la flock
+            flock.transform.transform.position = flock.transform.gameObject.GetComponent<Flock>().centerRadius;
+        }
+        
+        if (hit.transform.gameObject.GetComponent<Flock>().isUnitSelected)
+        {
+            if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Flock")) // Unit UnSelected
+            {
+                hit.transform.gameObject.GetComponent<Flock>().isUnitSelected = false;
+                flock = null;
+                isFlockEmpty = false;
+                Debug.DrawRay(ray.origin  - new Vector3(0,-1,0), ray.direction * 10000, Color.blue, 1, false);
+                
+                hit.transform.gameObject.GetComponent<Flock>().colorSelection.a = 0.05f;
+                hit.transform.transform.GetChild(0).GetComponentInChildren<Renderer>().material.color = hit.transform.gameObject.GetComponent<Flock>().colorSelection;
+            }
+        }
+        else
+        {
+            if ( hit.transform.gameObject.layer == LayerMask.NameToLayer("Flock")) // Unit Selected
+            {
+                hit.transform.gameObject.GetComponent<Flock>().isUnitSelected = true;
+                flock = hit.transform.gameObject;
+                Debug.DrawRay(ray.origin  - new Vector3(0,-1,0), ray.direction * 10000, Color.blue, 1, false);
+                
+                hit.transform.gameObject.GetComponent<Flock>().colorSelection.a = 0.2f;
+                hit.transform.transform.GetChild(0).GetComponentInChildren<Renderer>().material.color = hit.transform.gameObject.GetComponent<Flock>().colorSelection;
+            }
+            else // No Unit Selected
+            {
+                Debug.DrawRay(ray.origin  - new Vector3(0,-1,0), ray.direction * 10000, Color.red, 1, false);
+                hit.transform.transform.GetChild(0).GetComponentInChildren<Renderer>().material.color = hit.transform.gameObject.GetComponent<Flock>().colorSelection;
+            }
+            
+        }
+    }
+
+    void WhenAUnitIsSelected()
+    {
+        isFlockEmpty = true;
+        
+        if (hit.transform.gameObject.GetComponent<Flock>().isUnitSelected)
+        {
+            if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Flock")) // Unit UnSelected
+            {
+                hit.transform.gameObject.GetComponent<Flock>().isUnitSelected = false;
+                flock = null;
+                isFlockEmpty = false;
+                Debug.DrawRay(ray.origin  - new Vector3(0,-1,0), ray.direction * 10000, Color.blue, 1, false);
+                
+                hit.transform.gameObject.GetComponent<Flock>().colorSelection.a = 0.05f;
+                hit.transform.transform.GetChild(0).GetComponentInChildren<Renderer>().material.color = hit.transform.gameObject.GetComponent<Flock>().colorSelection;
+            }
+        }
+        else
+        {
+            if ( hit.transform.gameObject.layer == LayerMask.NameToLayer("Flock")) // Unit Selected
+            {
+                hit.transform.gameObject.GetComponent<Flock>().isUnitSelected = true;
+                flock = hit.transform.gameObject;
+                Debug.DrawRay(ray.origin  - new Vector3(0,-1,0), ray.direction * 10000, Color.blue, 1, false);
+                
+                hit.transform.gameObject.GetComponent<Flock>().colorSelection.a = 0.2f;
+                hit.transform.transform.GetChild(0).GetComponentInChildren<Renderer>().material.color = hit.transform.gameObject.GetComponent<Flock>().colorSelection;
+            }
+            else // No Unit Selected
+            {
+                Debug.DrawRay(ray.origin  - new Vector3(0,-1,0), ray.direction * 10000, Color.red, 1, false);
+                hit.transform.transform.GetChild(0).GetComponentInChildren<Renderer>().material.color = hit.transform.gameObject.GetComponent<Flock>().colorSelection;
+            }
+            
         }
     }
 

@@ -65,15 +65,34 @@ public class FlockAgent : MonoBehaviour
         {
             if (hitData.collider.CompareTag("FlockAgent"))
             {
-                if (isAttacking)
+
+                if (isEnnemy) 
                 {
-                    Debug.DrawRay(ray.origin, ray.direction * RayDistance , Color.green);
-                    //Destroy(hitData.transform.gameObject);
-                    hitData.transform.gameObject.SetActive(false);
-                    Debug.LogWarning(hitData.transform.name + " Was Killed by " + transform.name);
-                    //isAttacking = false;
-                    //Attacking();
+                    if (isAttacking && !hitData.collider.GetComponent<FlockAgent>().isEnnemy) // Verif si ennemi est un ennemi et non un alliee
+                    {
+                        Debug.DrawRay(ray.origin, ray.direction * RayDistance , Color.green);
+                        //Destroy(hitData.transform.gameObject);
+                        hitData.transform.gameObject.SetActive(false);
+                        Debug.LogWarning(hitData.transform.name + " Was Killed by " + transform.name);
+                        //isAttacking = false;
+                        //Attacking();
+                    }
                 }
+                else
+                {
+                    if (isAttacking && hitData.collider.GetComponent<FlockAgent>().isEnnemy) // Verif si ennemi est un ennemi et non un alliee
+                    {
+                        Debug.DrawRay(ray.origin, ray.direction * RayDistance , Color.green);
+                        //Destroy(hitData.transform.gameObject);
+                        hitData.transform.gameObject.SetActive(false);
+                        Debug.LogWarning(hitData.transform.name + " Was Killed by " + transform.name);
+                        //isAttacking = false;
+                        //Attacking();
+                    }
+                }
+                
+                
+                
                 
             }
         }
@@ -89,6 +108,10 @@ public class FlockAgent : MonoBehaviour
         transform.position += velocity * Time.deltaTime;
     }
 
+    
+    
+    
+    
     void Attacking()
     {
         if (isAttacking)

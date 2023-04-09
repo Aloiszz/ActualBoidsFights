@@ -242,7 +242,7 @@ public class Flock : MonoBehaviour
             }
             agent.Move(move);
 
-            //Combat();
+            Combat();
 
         }
         
@@ -255,11 +255,11 @@ public class Flock : MonoBehaviour
         Shoot();
         if (isCombat)
         {
-            isUnitShooting = true;
+            //isUnitShooting = true;
         }
         else
         {
-            isUnitShooting = false;
+            //isUnitShooting = false;
         }
         
     }
