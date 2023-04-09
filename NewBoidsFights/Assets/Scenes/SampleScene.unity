@@ -534,11 +534,39 @@ MonoBehaviour:
   flock: {fileID: 3429564234414965306, guid: 4681877deea41254a986cedf2edfc20b, type: 3}
   howManyAlliesFlocks: 2
   howManyEnnemiFlocks: 2
-  WhereToSpawns: []
-  count: 0
+  WhereToSpawns:
+  - {x: -50, y: 0, z: -40}
+  - {x: 50, y: 0, z: -40}
+  - {x: -50, y: 0, z: -40}
+  - {x: 50, y: 0, z: -40}
+  - {x: 150, y: 0, z: -40}
+  - {x: 250, y: 0, z: -40}
+  - {x: 350, y: 0, z: -40}
+  - {x: 450, y: 0, z: -40}
+  - {x: 550, y: 0, z: -40}
+  - {x: 650, y: 0, z: -40}
+  - {x: 750, y: 0, z: -40}
+  - {x: 850, y: 0, z: -40}
+  - {x: 950, y: 0, z: -40}
+  - {x: 1050, y: 0, z: -40}
+  count: 2
   countLocation: 0
-  WhereToSpawnsEnnemis: []
-  countEnnemy: 0
+  WhereToSpawnsEnnemis:
+  - {x: -50, y: 0, z: 80}
+  - {x: 50, y: 0, z: 80}
+  - {x: -50, y: 0, z: 80}
+  - {x: 50, y: 0, z: 80}
+  - {x: 150, y: 0, z: 80}
+  - {x: 250, y: 0, z: 80}
+  - {x: 350, y: 0, z: 80}
+  - {x: 450, y: 0, z: 80}
+  - {x: 550, y: 0, z: 80}
+  - {x: 650, y: 0, z: 80}
+  - {x: 750, y: 0, z: 80}
+  - {x: 850, y: 0, z: 80}
+  - {x: 950, y: 0, z: 80}
+  - {x: 1050, y: 0, z: 80}
+  countEnnemy: 2
   countLocationEnnemy: 0
   flockSpeedDeplacement: 0
 --- !u!4 &1982442869

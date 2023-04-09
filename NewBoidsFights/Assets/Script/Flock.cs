@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using NaughtyAttributes;
 using UnityEditor.Search;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -32,11 +33,15 @@ public class Flock : MonoBehaviour
     private float squareNeighborRadius;
     private float squareAvoidanceRadius;
 
+    [BoxGroup("Flock State")]
     [Header("Flock State")]
     public bool isCombat;
     public bool isMoving;
     public bool isWaiting;
     
+    [Header("Information about Combat")] 
+    public int engagementDistance = 50; // distance d'engagement requise pour attaquer une flock ennemy
+    public bool canEngageAuto = true; // permet d'engager les flocks ennemy can entre dans la range
     
     [Header("Information about flock")]
     public bool isUnitSelected; // Savoir si unité selectioner
@@ -250,9 +255,21 @@ public class Flock : MonoBehaviour
     }
 
 
+    void EngagementAuto()
+    {
+        foreach (var agent in agents)
+        {
+            agent.canEngageAuto = canEngageAuto;
+            agent.engagementDistance = engagementDistance;
+        }
+    }
+
+
     public void Combat()
     {
-        Shoot();
+        EngagementAuto();
+        
+        //Shoot();
         if (isCombat)
         {
             //isUnitShooting = true;

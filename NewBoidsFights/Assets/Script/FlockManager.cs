@@ -1,14 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using NaughtyAttributes;
 using Unity.Mathematics;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class FlockManager : MonoBehaviour
 {
-    
-    
     [Header("General Settings Flocks")]
     public GameObject flock;
     public int howManyAlliesFlocks;
@@ -61,5 +60,11 @@ public class FlockManager : MonoBehaviour
     {
         
     }
-    
+
+
+    [Button()]
+    void IntialiseFlock()
+    {
+        
+    }
 }

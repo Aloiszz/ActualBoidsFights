@@ -23,7 +23,6 @@ public class SphereCombatEngagmeent : MonoBehaviour
             if (other.GetComponentInParent<FlockAgent>().isEnnemy)
             {
                 GetComponentInParent<FlockAgent>().isAttacking = true;
-                
             }
 
             if (GetComponentInParent<FlockAgent>().isEnnemy)

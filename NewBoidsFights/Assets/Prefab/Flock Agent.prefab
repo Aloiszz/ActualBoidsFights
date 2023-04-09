@@ -180,7 +180,7 @@ MonoBehaviour:
   ammo: {fileID: 8106224990919001895, guid: 5263c0061305dcc4c99e77d9ede7982d, type: 3}
   RayDistance: 10
   engagementDistance: 25
-  canEngageAuto: 0
+  canEngageAuto: 1
   isEnnemy: 0
   isAttacking: 0
 --- !u!54 &4921157301341984552

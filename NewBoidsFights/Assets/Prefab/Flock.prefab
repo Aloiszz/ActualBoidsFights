@@ -221,6 +221,8 @@ MonoBehaviour:
   isCombat: 0
   isMoving: 0
   isWaiting: 0
+  engagementDistance: 50
+  canEngageAuto: 1
   isUnitSelected: 0
   isUnitEnnemy: 0
   isUnitShooting: 0

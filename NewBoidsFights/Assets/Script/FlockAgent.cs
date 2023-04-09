@@ -65,7 +65,7 @@ public class FlockAgent : MonoBehaviour
         {
             if (hitData.collider.CompareTag("FlockAgent"))
             {
-
+                
                 if (isEnnemy) 
                 {
                     if (isAttacking && !hitData.collider.GetComponent<FlockAgent>().isEnnemy) // Verif si ennemi est un ennemi et non un alliee
@@ -90,8 +90,6 @@ public class FlockAgent : MonoBehaviour
                         //Attacking();
                     }
                 }
-                
-                
                 
                 
             }
