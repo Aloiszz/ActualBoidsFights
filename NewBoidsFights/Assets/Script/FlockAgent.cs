@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -15,16 +16,26 @@ public class FlockAgent : MonoBehaviour
     [SerializeField] private Transform canon1;
     [SerializeField] private Transform canon2;
     [SerializeField] private GameObject ammo;
-    [SerializeField] private float RayDistance = 10;
+
+
+    [Header("Information about Unit")] 
+    [Range(0, 50)] public float HealtPoint = 50;
+    public bool isEnnemy;
+    public bool isAttacking;
+    private bool isShooting;
+    
     
     [Header("Information about Combat")] 
     public int engagementDistance = 50; // distance d'engagement requise pour attaquer une flock ennemy
     public bool canEngageAuto; // permet d'engager les flocks ennemy can entre dans la range
+
+    [Header("Information about Weapon")] [MinMaxSlider(0.0f, 100.0f)]
+    public float damageMinMax = 25; // Valeur min et max de dégat pouvant etre pris
     
-    [Space]
-    public bool isEnnemy;
-    public bool isAttacking;
-    private bool isShooting;
+    [Range(0, 100)] public float RayDistance = 10; // Distance de Tir 
+    [Range(0, 100)] public float delayBetweenRay = .15f; // Delay entre chaque tir
+    public bool canHitUnderGroundUnit = false;
+    
     
     public Collider AgentCollider
     {
@@ -71,8 +82,12 @@ public class FlockAgent : MonoBehaviour
                     if (isAttacking && !hitData.collider.GetComponent<FlockAgent>().isEnnemy) // Verif si ennemi est un ennemi et non un alliee
                     {
                         Debug.DrawRay(ray.origin, ray.direction * RayDistance , Color.green);
+                        hitData.collider.GetComponent<FlockAgent>().HealtPoint -= damageMinMax;
                         //Destroy(hitData.transform.gameObject);
-                        hitData.transform.gameObject.SetActive(false);
+                        if (hitData.collider.GetComponent<FlockAgent>().HealtPoint <= 0)
+                        {
+                            hitData.transform.gameObject.SetActive(false);
+                        }
                         Debug.LogWarning(hitData.transform.name + " Was Killed by " + transform.name);
                         //isAttacking = false;
                         //Attacking();
@@ -84,7 +99,11 @@ public class FlockAgent : MonoBehaviour
                     {
                         Debug.DrawRay(ray.origin, ray.direction * RayDistance , Color.green);
                         //Destroy(hitData.transform.gameObject);
-                        hitData.transform.gameObject.SetActive(false);
+                        hitData.collider.GetComponent<FlockAgent>().HealtPoint -= damageMinMax;
+                        if (hitData.collider.GetComponent<FlockAgent>().HealtPoint <= 0)
+                        {
+                            hitData.transform.gameObject.SetActive(false);
+                        }
                         Debug.LogWarning(hitData.transform.name + " Was Killed by " + transform.name);
                         //isAttacking = false;
                         //Attacking();

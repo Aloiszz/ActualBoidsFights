@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using NaughtyAttributes;
+using Unity.Collections;
 using UnityEditor.Search;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -13,7 +14,7 @@ public class Flock : MonoBehaviour
     public FLockBehavior behavior;
     public StayInRadiusBehavior radiusBehavior;
 
-    [Range(10, 1500)] 
+    [Range(1, 1500)] 
     public int startingCount = 250; // Population de flock Instantié
     public float AgentDensity = 0.01f;
 
@@ -33,19 +34,26 @@ public class Flock : MonoBehaviour
     private float squareNeighborRadius;
     private float squareAvoidanceRadius;
 
-    [BoxGroup("Flock State")]
+    [BoxGroup("Flock")]
     [Header("Flock State")]
     public bool isCombat;
+    [BoxGroup("Flock")]
     public bool isMoving;
+    [BoxGroup("Flock")]
     public bool isWaiting;
     
-    [Header("Information about Combat")] 
+    [BoxGroup("Flock")]
+    [Header("Information about Combat Transfered to the Unit")] 
     public int engagementDistance = 50; // distance d'engagement requise pour attaquer une flock ennemy
+    [BoxGroup("Flock")]
     public bool canEngageAuto = true; // permet d'engager les flocks ennemy can entre dans la range
     
+    [BoxGroup("Flock")]
     [Header("Information about flock")]
-    public bool isUnitSelected; // Savoir si unité selectioner
+    public bool isUnitSelected; // Savoir si unité 
+    [BoxGroup("Flock")]
     public bool isUnitEnnemy; //Savoir si unité est Allié ou ennemi
+    [BoxGroup("Flock")]
     public bool isUnitShooting;
     
     private GameObject _SphereFlockSelection;
@@ -79,8 +87,6 @@ public class Flock : MonoBehaviour
         }
         
         radius = radiusBehavior.radius;
-        
-        
     }
 
     
@@ -162,63 +168,10 @@ public class Flock : MonoBehaviour
     
     void OnDrawGizmosSelected ()
     {
-        Gizmos.color = new Color(1,0.92f,.016f,1f);
+        Gizmos.color = new Color(1,0.92f,.016f,.5f);
         Gizmos.DrawSphere(centerRadius, radiusBehavior.radius);
     }
 
-
-    void DrawRayScreentToWorldPoint() // Deplacement des troupes vers un points sur le terrain
-    {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, 10000))
-            {
-                if (isUnitSelected) // vérifier si l'unité est selectionne
-                {
-                    if (hit.collider.CompareTag("Terrain"))
-                    {
-                        Debug.Log("Hit Terrain!" + hit.point);
-                        Debug.DrawRay(ray.origin - new Vector3(0,-1,0) , ray.direction * 10000, Color.green, 1, false);
-                        centerRadius = new Vector3(hit.point.x, 0, hit.point.z); // Radius limite de la flock
-                        
-                        /*GetComponent<SphereCollider>().center = radiusBehavior.center;
-                        _SphereFlockSelection.transform.position = radiusBehavior.center;*/
-                        gameObject.transform.position = centerRadius;
-                        
-                    }
-                    if (/*hit.collider.CompareTag("Flock")*/ hit.transform.gameObject.layer == LayerMask.NameToLayer("Flock"))
-                    {
-                        isUnitSelected = false;
-                        Debug.DrawRay(ray.origin  - new Vector3(0,-1,0), ray.direction * 10000, Color.blue, 1, false);
-                        
-                        colorSelection.a = 0.05f;
-                        gameObject.transform.GetChild(0).GetComponentInChildren<Renderer>().material.color = colorSelection;
-                    }
-                }
-                else
-                {
-                    if ( hit.transform.gameObject.layer == LayerMask.NameToLayer("Flock")) //hit.collider.CompareTag("Flock")
-                    {
-                        isUnitSelected = true;
-                        Debug.DrawRay(ray.origin  - new Vector3(0,-1,0), ray.direction * 10000, Color.blue, 1, false);
-                        
-                        colorSelection.a = 0.2f;
-                        gameObject.transform.GetChild(0).GetComponentInChildren<Renderer>().material.color = colorSelection;
-                    }
-                    else
-                    {
-                        Debug.DrawRay(ray.origin  - new Vector3(0,-1,0), ray.direction * 10000, Color.red, 1, false);
-                        gameObject.transform.GetChild(0).GetComponentInChildren<Renderer>().material.color = colorSelection;
-                    }
-                }
-            }
-        }
-        
-    }
-    
-    
     void Update()
     {
         foreach (FlockAgent agent in agents)
@@ -227,8 +180,9 @@ public class Flock : MonoBehaviour
             //agent.GetComponent<Renderer>().material.color = Color.Lerp(Color.white, Color.red, context.Count / 6f);
 
             Vector3 move = behavior.CalculateMove(agent, context, this);
-            Vector3 partialMove = StayInRadius(agent);
+
             
+            Vector3 partialMove = StayInRadius(agent);
             if (partialMove != Vector3.zero)
             {
                 if (partialMove.sqrMagnitude < 0.01f * 0.01f)
@@ -240,6 +194,7 @@ public class Flock : MonoBehaviour
                 move += partialMove;
             }
             
+            
             move *= driveFactor;
             if (move.sqrMagnitude > squareMaxSpeed)
             {
@@ -250,8 +205,6 @@ public class Flock : MonoBehaviour
             Combat();
 
         }
-        
-        //DrawRayScreentToWorldPoint();
     }
 
 
@@ -261,6 +214,14 @@ public class Flock : MonoBehaviour
         {
             agent.canEngageAuto = canEngageAuto;
             agent.engagementDistance = engagementDistance;
+            if (agent.isAttacking)
+            {
+                isCombat = true;
+            }
+            else
+            {
+                isCombat = false;
+            }
         }
     }
 
@@ -277,8 +238,15 @@ public class Flock : MonoBehaviour
         else
         {
             //isUnitShooting = false;
+            
         }
         
+    }
+
+    IEnumerator CombatHIHI()
+    {
+        yield return new WaitForSeconds(0.1f);
+        isCombat = false;
     }
 
 

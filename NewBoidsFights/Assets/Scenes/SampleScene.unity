@@ -532,8 +532,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flock: {fileID: 3429564234414965306, guid: 4681877deea41254a986cedf2edfc20b, type: 3}
-  howManyAlliesFlocks: 2
-  howManyEnnemiFlocks: 2
+  howManyAlliesFlocks: 1
+  howManyEnnemiFlocks: 1
   WhereToSpawns:
   - {x: -50, y: 0, z: -40}
   - {x: 50, y: 0, z: -40}
