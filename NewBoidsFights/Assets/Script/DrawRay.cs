@@ -7,6 +7,7 @@ public class DrawRay : MonoBehaviour
     private Camera cam;
 
     public GameObject flock;
+    public GameObject flock2;
     public GameObject[] flocks;
     
     private RaycastHit hit;
@@ -48,31 +49,30 @@ public class DrawRay : MonoBehaviour
             
             if (Physics.Raycast(ray, out hit, 10000))
             {
-                WhenNoUnitIsSelected();
-
-                /*if (flock == null)
+                
+                if (hit.collider.CompareTag("Terrain")) // Unit Selected and moving toward position
                 {
-                    
+                    Debug.DrawRay(ray.origin - new Vector3(0,-1,0) , ray.direction * 10000, Color.green, 1, false);
+                    flock.transform.gameObject.GetComponent<Flock>().centerRadius = new Vector3(hit.point.x, 0, hit.point.z); // Radius limite de la flock
+                    flock.transform.transform.position = flock.transform.gameObject.GetComponent<Flock>().centerRadius;
+                    DeSelectUnit();
+                }
+
+                if (flock == null)
+                {
+                    WhenNoUnitIsSelected();
                 }
                 else
                 {
                     WhenAUnitIsSelected();
                 }
-                */
-                
+
             }
         }
     }
 
     void WhenNoUnitIsSelected()
     {
-        if (hit.collider.CompareTag("Terrain")) // Unit Selected and moving toward position
-        {
-            Debug.DrawRay(ray.origin - new Vector3(0,-1,0) , ray.direction * 10000, Color.green, 1, false);
-            flock.transform.gameObject.GetComponent<Flock>().centerRadius = new Vector3(hit.point.x, 0, hit.point.z); // Radius limite de la flock
-            flock.transform.transform.position = flock.transform.gameObject.GetComponent<Flock>().centerRadius;
-        }
-        
         if (hit.transform.gameObject.GetComponent<Flock>().isUnitSelected)
         {
             if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Flock")) // Unit UnSelected
@@ -108,7 +108,7 @@ public class DrawRay : MonoBehaviour
 
     void WhenAUnitIsSelected()
     {
-        isFlockEmpty = true;
+        //isFlockEmpty = true;
         
         if (hit.transform.gameObject.GetComponent<Flock>().isUnitSelected)
         {
@@ -116,6 +116,7 @@ public class DrawRay : MonoBehaviour
             {
                 hit.transform.gameObject.GetComponent<Flock>().isUnitSelected = false;
                 flock = null;
+                flock2 = null;
                 isFlockEmpty = false;
                 Debug.DrawRay(ray.origin  - new Vector3(0,-1,0), ray.direction * 10000, Color.blue, 1, false);
                 
@@ -128,11 +129,18 @@ public class DrawRay : MonoBehaviour
             if ( hit.transform.gameObject.layer == LayerMask.NameToLayer("Flock")) // Unit Selected
             {
                 hit.transform.gameObject.GetComponent<Flock>().isUnitSelected = true;
-                flock = hit.transform.gameObject;
+                flock2 = hit.transform.gameObject;
                 Debug.DrawRay(ray.origin  - new Vector3(0,-1,0), ray.direction * 10000, Color.blue, 1, false);
                 
                 hit.transform.gameObject.GetComponent<Flock>().colorSelection.a = 0.2f;
                 hit.transform.transform.GetChild(0).GetComponentInChildren<Renderer>().material.color = hit.transform.gameObject.GetComponent<Flock>().colorSelection;
+                
+                
+                flock.transform.gameObject.GetComponent<Flock>().centerRadius = new Vector3(hit.point.x, 0, hit.point.z); // Radius limite de la flock
+                flock.transform.transform.position = flock.transform.gameObject.GetComponent<Flock>().centerRadius;
+                
+                flock2.transform.gameObject.GetComponent<Flock>().centerRadius = new Vector3(hit.point.x, 0, hit.point.z); // Radius limite de la flock
+                flock2.transform.transform.position = flock.transform.gameObject.GetComponent<Flock>().centerRadius;
             }
             else // No Unit Selected
             {
@@ -151,6 +159,7 @@ public class DrawRay : MonoBehaviour
         {
             isFlockEmpty = false;
             flock = null;
+            flock2 = null;
             i.GetComponent<Flock>().isUnitSelected = false;
             i.transform.gameObject.GetComponent<Flock>().colorSelection.a = 0.05f;
             i.transform.transform.GetChild(0).GetComponentInChildren<Renderer>().material.color = i.transform.gameObject.GetComponent<Flock>().colorSelection;
