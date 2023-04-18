@@ -15,6 +15,14 @@ public class CompositeBehavior : FLockBehavior
             Debug.LogError("Data mismatch" + name, this);
             return Vector3.zero;
         }
+
+
+
+        switch (flock.currentFlock)
+        {
+            case FlockType.Aerien:
+                break;
+        }
         
         Vector3 move = Vector3.zero;
 
@@ -32,7 +40,9 @@ public class CompositeBehavior : FLockBehavior
                 move += partialMove;
             }
         }
+        
 
         return move;
     }
+    
 }

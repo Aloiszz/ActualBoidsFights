@@ -7,6 +7,7 @@ using UnityEditor.Search;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+
 public class Flock : MonoBehaviour
 {
     public FlockAgent agentPrefab; // prefab du flock
@@ -33,9 +34,13 @@ public class Flock : MonoBehaviour
     private float squareMaxSpeed;
     private float squareNeighborRadius;
     private float squareAvoidanceRadius;
-
+    
+    [Header("Flock Type")]
     [BoxGroup("Flock")]
+    public FlockType currentFlock;
+    
     [Header("Flock State")]
+    [BoxGroup("Flock")]
     public bool isCombat;
     [BoxGroup("Flock")]
     public bool isMoving;
@@ -60,7 +65,7 @@ public class Flock : MonoBehaviour
     private Renderer m_FlockSelection; // Material pour la selection de la flock
     [HideInInspector]public Color colorSelection;
     
-    public Vector3 centerRadius; //récupération du centre Radius depuis SO RadiusBehavior
+    [HideInInspector] public Vector3 centerRadius; //récupération du centre Radius depuis SO RadiusBehavior
     private float radius; //récupération du Radius depuis SO RadiusBehavior
 
     public float SquareAvoidanceRadius
@@ -104,6 +109,26 @@ public class Flock : MonoBehaviour
         
         Invoke(nameof(ChooseColorFlock), 0.01f);
 
+
+        switch (currentFlock)
+        {
+            case FlockType.Aerien:
+                CreateAerienFlock();
+                break;
+            case FlockType.Terrestre:
+                CreateTerrestreFlock();
+                break;
+            case FlockType.SousTerrain:
+                break;
+        }
+
+        
+    }
+
+    #region CreateTypeOfFlock
+
+    void CreateAerienFlock()
+    {
         for (int i = 0; i < startingCount; i++)
         {
             FlockAgent newAgent = Instantiate(
@@ -112,7 +137,30 @@ public class Flock : MonoBehaviour
                 Quaternion.Euler(Vector3.forward * Random.Range(0f, 360f)), //Permet d'instantié object dans toute les directions
                 FlockManager.instance.transform
             );
-            newAgent.name = "Flock "+ (FlockManager.instance.countLocation) + " Agent " + i;
+            newAgent.name = "Flock Aerien "+ (FlockManager.instance.countLocation) + " Agent " + i;
+            if (isUnitEnnemy)
+            {
+                newAgent.isEnnemy = true;
+            }
+            agents.Add(newAgent);
+        }
+        FlockManager.instance.countLocation++;
+        if (isUnitEnnemy)
+        {
+            FlockManager.instance.countLocationEnnemy++;
+        }
+    }
+    void CreateTerrestreFlock()
+    {
+        for (int i = 0; i < startingCount; i++)
+        {
+            FlockAgent newAgent = Instantiate(
+                agentPrefab,
+                Random.insideUnitSphere * startingCount * AgentDensity + centerRadius, //Permet d'instantié object dans une range Spherique
+                Quaternion.Euler(Vector3.forward * Random.Range(0f, 360f)), //Permet d'instantié object dans toute les directions
+                FlockManager.instance.transform
+            );
+            newAgent.name = "Flock Terrestre "+ (FlockManager.instance.countLocation) + " Agent " + i;
             if (isUnitEnnemy)
             {
                 newAgent.isEnnemy = true;
@@ -126,6 +174,9 @@ public class Flock : MonoBehaviour
         }
     }
 
+
+    #endregion
+    
     void ChooseColorFlock()
     {
         /*
@@ -179,29 +230,56 @@ public class Flock : MonoBehaviour
             List<Transform> context = GetNearbyObjects(agent);
             //agent.GetComponent<Renderer>().material.color = Color.Lerp(Color.white, Color.red, context.Count / 6f);
 
-            Vector3 move = behavior.CalculateMove(agent, context, this);
-
-            
-            Vector3 partialMove = StayInRadius(agent);
-            if (partialMove != Vector3.zero)
+            if (currentFlock == FlockType.Aerien)
             {
-                if (partialMove.sqrMagnitude < 0.01f * 0.01f)
+                Vector3 move = behavior.CalculateMove(agent, context, this);
+                
+                Vector3 partialMove = StayInRadius(agent);
+                if (partialMove != Vector3.zero)
                 {
-                    partialMove.Normalize();
-                    partialMove *= 0.01f;
+                    if (partialMove.sqrMagnitude < 0.01f * 0.01f)
+                    {
+                        partialMove.Normalize();
+                        partialMove *= 0.01f;
+                    }
+
+                    move += partialMove;
                 }
-
-                move += partialMove;
+            
+            
+                move *= driveFactor;
+                if (move.sqrMagnitude > squareMaxSpeed)
+                {
+                    move = move.normalized * maxSpeed;
+                }
+                agent.Move(move);
             }
-            
-            
-            move *= driveFactor;
-            if (move.sqrMagnitude > squareMaxSpeed)
+            else
             {
-                move = move.normalized * maxSpeed;
-            }
-            agent.Move(move);
+                Vector3 move = behavior.CalculateMove(agent, context, this);
+                move.y = 0;
+                
+                Vector3 partialMove = StayInRadius(agent);
+                if (partialMove != Vector3.zero)
+                {
+                    if (partialMove.sqrMagnitude < 0.01f * 0.01f)
+                    {
+                        partialMove.Normalize();
+                        partialMove *= 0.01f;
+                    }
 
+                    move += partialMove;
+                }
+            
+            
+                move *= driveFactor;
+                if (move.sqrMagnitude > squareMaxSpeed)
+                {
+                    move = move.normalized * maxSpeed;
+                }
+                agent.Move(move);
+            }
+            
             Combat();
 
         }

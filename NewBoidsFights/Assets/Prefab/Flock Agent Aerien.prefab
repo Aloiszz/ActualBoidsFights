@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 816434220588408206}
   - component: {fileID: 4921157301341984552}
   m_Layer: 0
-  m_Name: Flock Agent
+  m_Name: Flock Agent Aerien
   m_TagString: FlockAgent
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -178,13 +178,15 @@ MonoBehaviour:
   canon1: {fileID: 816434222012362555}
   canon2: {fileID: 816434221066111539}
   ammo: {fileID: 8106224990919001895, guid: 5263c0061305dcc4c99e77d9ede7982d, type: 3}
-  engagementDistance: 25
-  canEngageAuto: 1
-  damageMinMax: {x: 38.258007, y: 63.61633}
-  RayDistance: 10
-  DistanceMaxMin: {x: 40.242554, y: 76.626236}
+  HealtPoint: 50
   isEnnemy: 0
   isAttacking: 0
+  engagementDistance: 25
+  canEngageAuto: 1
+  damageMinMax: 25
+  RayDistance: 10
+  delayBetweenRay: 0.15
+  canHitUnderGroundUnit: 0
 --- !u!54 &4921157301341984552
 Rigidbody:
   m_ObjectHideFlags: 0
