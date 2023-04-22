@@ -976,7 +976,7 @@ MonoBehaviour:
   indexAllies: 0
   currentFlock: 0000000001000000
   howManyEnnemiFlocks: 1
-  currentFlockEnnemi: 0100000001000000
+  currentFlockEnnemi: 0100000000000000
   WhereToSpawns: []
   count: 2
   countLocation: 0

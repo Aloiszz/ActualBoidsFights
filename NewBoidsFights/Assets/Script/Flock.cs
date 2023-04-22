@@ -94,7 +94,10 @@ public class Flock : MonoBehaviour
                 case FlockType.Terrestre:
                     centerRadius.y = 0;
                     heightOfFlocks = 0;
-                    transform.position = centerRadius; 
+                    transform.position = centerRadius;
+                    maxSpeed = 10;
+                    avoidanceRadiusMultiplier = 1;
+                    neighborRadius = 1;
                     break;
             }
         }
@@ -110,6 +113,9 @@ public class Flock : MonoBehaviour
                     centerRadius.y = 0;
                     heightOfFlocks = 0;
                     transform.position = centerRadius;
+                    maxSpeed = 10;
+                    avoidanceRadiusMultiplier = 1;
+                    neighborRadius = 1;
                     break;
             }
         }
