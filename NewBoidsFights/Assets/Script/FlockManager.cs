@@ -8,32 +8,42 @@ using Random = UnityEngine.Random;
 
 public class FlockManager : MonoBehaviour
 {
-    [BoxGroup("Flock Creation")] [Header("General Settings Flocks")]
-    // public FlockType currentFlock;
-    public List<FlockType> currentFlock;
-
-    [BoxGroup("Flock Creation")]
+    [BoxGroup("General Settings Flocks")]
     public GameObject flock;
     
     [Space]
-    [BoxGroup("Flock Creation")]
-    public int howManyAlliesFlocks;
-    [BoxGroup("Flock Creation")]
-    public int howManyEnnemiFlocks;
     
-    private Vector3 whereToSpawn = new Vector3(-50,10,-40);
+    [BoxGroup("General Settings Flocks")]
+    [Header("General Settings Flocks")]
+    // public FlockType currentFlock;
+    public int howManyAlliesFlocks;
+    [SerializeField] int indexAllies;
+    [BoxGroup("General Settings Flocks")]
+    public List<FlockType> currentFlock;
+
+    [Space]
+    [BoxGroup("General Settings Flocks")]
+    public int howManyEnnemiFlocks;
+    private int indexEnnemis;
+    [BoxGroup("General Settings Flocks")]
+    public List<FlockType> currentFlockEnnemi;
+
+    
+
+    [HideInInspector] public static float heightOfFlocks = 10;
+    private Vector3 whereToSpawn = new Vector3(-50,heightOfFlocks,-40);
     [BoxGroup("Flock Creation")]
-    public List<Vector3> WhereToSpawns = new List<Vector3>() ;
+    [HideInInspector]public List<Vector3> WhereToSpawns = new List<Vector3>() ;
     [HideInInspector]public int count;
     [HideInInspector]public int countLocation = 0;
     
     
-    private Vector3 whereToSpawnEnnemis = new Vector3(-50,0,80);
+    private Vector3 whereToSpawnEnnemis = new Vector3(-50,heightOfFlocks,80);
     [BoxGroup("Flock Creation")]
-    public List<Vector3> WhereToSpawnsEnnemis = new List<Vector3>() ;
+    [HideInInspector]public List<Vector3> WhereToSpawnsEnnemis = new List<Vector3>() ;
     [HideInInspector]public int countEnnemy = 0;
     [BoxGroup("Flock Creation")]
-    public int countLocationEnnemy = 0;
+    [HideInInspector]public int countLocationEnnemy = 0;
     
     
 
@@ -41,32 +51,69 @@ public class FlockManager : MonoBehaviour
 
     [BoxGroup("Flock Creation")]
     [Header("Specific Parameters")] 
-    public float flockSpeedDeplacement;
+    [HideInInspector]public float flockSpeedDeplacement;
     private void Awake()
     {
         instance = this;
+
+        if (currentFlock.Count == 0)
+        {
+            for (int j = 0; j < howManyAlliesFlocks; j++)
+            {
+                currentFlock.Add(FlockType.Aerien);
+            }
+        }
+        else
+        {
+            howManyAlliesFlocks = currentFlock.Count;
+        }
+
+        if (currentFlockEnnemi.Count == 0)
+        {
+            for (int j = 0; j < howManyEnnemiFlocks; j++)
+            {
+                currentFlockEnnemi.Add(FlockType.Aerien);
+            }
+        }
+        else
+        {
+            howManyEnnemiFlocks = currentFlockEnnemi.Count;
+        }
+        
+        
     }
 
     void Start()
     {
+        InstantiateAlliesFlock();
+        InstantiateEnnemiesFlock();
+    }
+
+    void InstantiateAlliesFlock()
+    {
         for (count = 0; count < howManyAlliesFlocks; count++)
         {
             WhereToSpawns.Add(whereToSpawn);
-            whereToSpawn += new Vector3(100, transform.position.y, 0);
+            whereToSpawn += new Vector3(50, transform.position.y, 0);
             //countLocation++;
             GameObject flockManager = Instantiate(flock, WhereToSpawns[count], quaternion.identity, transform);
-            flockManager.GetComponent<Flock>().currentFlock = currentFlock[0];
+            flockManager.GetComponent<Flock>().currentFlock = currentFlock[indexAllies];
+            indexAllies++;
             flockManager.name = "Flock " + (count);
-        } 
-        
+        }
+    }
+
+    void InstantiateEnnemiesFlock()
+    {
         for (countEnnemy = 0; countEnnemy < howManyEnnemiFlocks; countEnnemy++)
         {
             WhereToSpawnsEnnemis.Add(whereToSpawnEnnemis);
-            whereToSpawnEnnemis += new Vector3(100, 0, 0);
+            whereToSpawnEnnemis += new Vector3(50, transform.position.y, 0);
             //countLocation++;
             GameObject flockManager = Instantiate(flock, WhereToSpawnsEnnemis[countEnnemy], quaternion.identity, transform);
             flockManager.name = "Flock Ennemy " + (countEnnemy);
-            flockManager.GetComponent<Flock>().currentFlock = currentFlock[1];
+            flockManager.GetComponent<Flock>().currentFlock = currentFlockEnnemi[indexEnnemis];
+            indexEnnemis++;
             flockManager.GetComponent<Flock>().isUnitEnnemy = true;
         }
     }
@@ -75,13 +122,70 @@ public class FlockManager : MonoBehaviour
     {
         
     }
-
-
-    [Button()]
-    void IntialiseFlock()
+    
+    [Button("------------------")]
+    void Separation2()
     {
         
     }
+    
+    [Button()]
+    public void AjouterAllierAerien()
+    {
+        currentFlock.Add(FlockType.Aerien);
+        InstantiateAlliesFlock();
+    }
+    
+    [Button()]
+    public void AjouterAllierTerrestre()
+    {
+        currentFlock.Add(FlockType.Terrestre);
+    }
+    [Button()]
+    public void RemoveAllAllies()
+    {
+        currentFlock.Clear();
+    }
+
+
+    [Button("------------------")]
+    void Separation()
+    {
+        
+    }
+    
+    [Button()]
+    public void AjouterEnnemieAerien()
+    {
+        currentFlockEnnemi.Add(FlockType.Aerien);
+    }
+    
+    [Button()]
+    public void AjouterEnnemieTerrestre()
+    {
+        currentFlockEnnemi.Add(FlockType.Terrestre);
+    }
+    [Button()]
+    public void RemoveAllEnnemis()
+    {
+        currentFlockEnnemi.Clear();
+    }
+    
+    [Button("------------------")]
+    void Separation1()
+    {
+        
+    }
+    
+    [Button()]
+    public void RemoveAllUnit()
+    {
+        currentFlock.Clear();
+        currentFlockEnnemi.Clear();
+    }
+    
+    
+    
 }
 
 public enum FlockType

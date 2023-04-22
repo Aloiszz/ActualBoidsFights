@@ -87,6 +87,7 @@ public class FlockAgent : MonoBehaviour
                         if (hitData.collider.GetComponent<FlockAgent>().HealtPoint <= 0)
                         {
                             hitData.transform.gameObject.SetActive(false);
+                            /*hitData.collider.GetComponent<FlockAgent>().*/
                         }
                         Debug.LogWarning(hitData.transform.name + " Was Killed by " + transform.name);
                         //isAttacking = false;

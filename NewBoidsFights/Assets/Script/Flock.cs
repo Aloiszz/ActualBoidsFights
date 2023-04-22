@@ -10,7 +10,8 @@ using Random = UnityEngine.Random;
 
 public class Flock : MonoBehaviour
 {
-    public FlockAgent agentPrefab; // prefab du flock
+    public FlockAgent agentPrefab; // prefab du flock aerien
+    public FlockAgent agentTerrestre;
     private List<FlockAgent> agents = new List<FlockAgent>(); // permet de stocker tout les agents
     public FLockBehavior behavior;
     public StayInRadiusBehavior radiusBehavior;
@@ -64,8 +65,10 @@ public class Flock : MonoBehaviour
     private GameObject _SphereFlockSelection;
     private Renderer m_FlockSelection; // Material pour la selection de la flock
     [HideInInspector]public Color colorSelection;
-    
-    [HideInInspector] public Vector3 centerRadius; //récupération du centre Radius depuis SO RadiusBehavior
+
+    [BoxGroup("Flock")] 
+    [HideInInspector]public float heightOfFlocks = 10;
+    public Vector3 centerRadius; //récupération du centre Radius depuis SO RadiusBehavior
     private float radius; //récupération du Radius depuis SO RadiusBehavior
 
     public float SquareAvoidanceRadius
@@ -84,11 +87,31 @@ public class Flock : MonoBehaviour
             centerRadius = FlockManager.instance.WhereToSpawnsEnnemis[FlockManager.instance.countLocationEnnemy];
             //gameObject.layer = 2;
             //radiusBehavior.center = new Vector3(0, 0, 50);
+            switch (currentFlock)
+            {
+                case FlockType.Aerien:
+                    break;
+                case FlockType.Terrestre:
+                    centerRadius.y = 0;
+                    heightOfFlocks = 0;
+                    transform.position = centerRadius; 
+                    break;
+            }
         }
         else
         {
             centerRadius = FlockManager.instance.WhereToSpawns[FlockManager.instance.countLocation];
             //radiusBehavior.center = new Vector3(0, 0, 0);
+            switch (currentFlock)
+            {
+                case FlockType.Aerien:
+                    break;
+                case FlockType.Terrestre:
+                    centerRadius.y = 0;
+                    heightOfFlocks = 0;
+                    transform.position = centerRadius;
+                    break;
+            }
         }
         
         radius = radiusBehavior.radius;
@@ -155,7 +178,7 @@ public class Flock : MonoBehaviour
         for (int i = 0; i < startingCount; i++)
         {
             FlockAgent newAgent = Instantiate(
-                agentPrefab,
+                agentTerrestre,
                 Random.insideUnitSphere * startingCount * AgentDensity + centerRadius, //Permet d'instantié object dans une range Spherique
                 Quaternion.Euler(Vector3.forward * Random.Range(0f, 360f)), //Permet d'instantié object dans toute les directions
                 FlockManager.instance.transform
@@ -312,11 +335,12 @@ public class Flock : MonoBehaviour
         if (isCombat)
         {
             //isUnitShooting = true;
+            squareMaxSpeed = (maxSpeed + 10) * (maxSpeed + 10) ;
         }
         else
         {
             //isUnitShooting = false;
-            
+            squareMaxSpeed = maxSpeed * maxSpeed;
         }
         
     }

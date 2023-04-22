@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class DrawRay : MonoBehaviour
@@ -9,6 +10,9 @@ public class DrawRay : MonoBehaviour
     public GameObject flock;
     public GameObject flock2;
     public GameObject[] flocks;
+
+    [SerializeField] private TextMeshProUGUI  _UnitSelected;
+    [SerializeField] private TextMeshProUGUI  _UnitType;
     
     private RaycastHit hit;
     private Ray ray;
@@ -38,7 +42,17 @@ public class DrawRay : MonoBehaviour
         {
             DeSelectUnit();
         }
-        
+
+        if (flock == null)
+        {
+            _UnitSelected.text = "Unit Selected : ";
+            _UnitType.text = "Unit Type : ";
+        }
+        else
+        {
+            _UnitSelected.text = "Unit Selected : " + flock.name + " is ennemy " + flock.GetComponent<Flock>().isUnitEnnemy;
+            _UnitType.text = "Unit Type : " + flock.GetComponent<Flock>().currentFlock.ToString();
+        }
     }
     
     void DrawRayScreentToWorldPoint() // Deplacement des troupes vers un points sur le terrain
@@ -53,7 +67,7 @@ public class DrawRay : MonoBehaviour
                 if (hit.collider.CompareTag("Terrain")) // Unit Selected and moving toward position
                 {
                     Debug.DrawRay(ray.origin - new Vector3(0,-1,0) , ray.direction * 10000, Color.green, 1, false);
-                    flock.transform.gameObject.GetComponent<Flock>().centerRadius = new Vector3(hit.point.x, 0, hit.point.z); // Radius limite de la flock
+                    flock.transform.gameObject.GetComponent<Flock>().centerRadius = new Vector3(hit.point.x,  flock.transform.gameObject.GetComponent<Flock>().heightOfFlocks, hit.point.z); // Radius limite de la flock
                     flock.transform.transform.position = flock.transform.gameObject.GetComponent<Flock>().centerRadius;
                     DeSelectUnit();
                 }
@@ -136,10 +150,10 @@ public class DrawRay : MonoBehaviour
                 hit.transform.transform.GetChild(0).GetComponentInChildren<Renderer>().material.color = hit.transform.gameObject.GetComponent<Flock>().colorSelection;
                 
                 
-                flock.transform.gameObject.GetComponent<Flock>().centerRadius = new Vector3(hit.point.x, 0, hit.point.z); // Radius limite de la flock
+                flock.transform.gameObject.GetComponent<Flock>().centerRadius = new Vector3(hit.point.x, flock.transform.gameObject.GetComponent<Flock>().heightOfFlocks, hit.point.z); // Radius limite de la flock
                 flock.transform.transform.position = flock.transform.gameObject.GetComponent<Flock>().centerRadius;
                 
-                flock2.transform.gameObject.GetComponent<Flock>().centerRadius = new Vector3(hit.point.x, 0, hit.point.z); // Radius limite de la flock
+                flock2.transform.gameObject.GetComponent<Flock>().centerRadius = new Vector3(hit.point.x, flock2.transform.gameObject.GetComponent<Flock>().heightOfFlocks , hit.point.z); // Radius limite de la flock
                 flock2.transform.transform.position = flock.transform.gameObject.GetComponent<Flock>().centerRadius;
             }
             else // No Unit Selected
