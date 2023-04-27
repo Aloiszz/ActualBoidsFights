@@ -24,6 +24,7 @@ public class FlockAgent : MonoBehaviour
 
     [Header("Information about Unit")] 
     [Range(0, 50)] public float HealtPoint = 50;
+    private float healtPointMax;
     public bool isEnnemy;
     public bool isAttacking;
     private bool isShooting;
@@ -45,7 +46,10 @@ public class FlockAgent : MonoBehaviour
     [Header("Visual Part")]
     public RawImage healtBar;
     [SerializeField] private Gradient healtBarColor;
-    private int transitionGrandient = 1;
+    private float transitionGrandient = 1;
+    
+    public Transform ObjectLook;
+    private GameObject LookAt;
     
     public Collider AgentCollider
     {
@@ -59,18 +63,20 @@ public class FlockAgent : MonoBehaviour
     {
         agentCollider = GetComponent<Collider>();
         healtBar.color = healtBarColor.Evaluate(transitionGrandient);
-    }
-    
-    private void FixedUpdate()
-    {
         
+        //ObjectLook = transform.GetComponent<Transform>();
+        LookAt = GameObject.FindGameObjectWithTag("MainCamera");
+        
+        healtPointMax = HealtPoint;
     }
-    
-    
     private void Update()
     {
-        transitionGrandient = ((int)HealtPoint / transitionGrandient);
+        if (ObjectLook)
+        {
+            ObjectLook.LookAt(2 * ObjectLook.position - LookAt.transform.position);
+        }
         
+        transitionGrandient = (HealtPoint / healtPointMax);
         healtBar.color = healtBarColor.Evaluate(transitionGrandient);
         
         
@@ -103,7 +109,6 @@ public class FlockAgent : MonoBehaviour
                         if (hitData.collider.GetComponent<FlockAgent>().HealtPoint <= 0)
                         {
                             hitData.transform.gameObject.SetActive(false);
-                            /*hitData.collider.GetComponent<FlockAgent>().*/
                         }
                         Debug.LogWarning(hitData.transform.name + " Was Killed by " + transform.name);
                         //isAttacking = false;
@@ -126,8 +131,6 @@ public class FlockAgent : MonoBehaviour
                         //Attacking();
                     }
                 }
-                
-                
             }
         }
         

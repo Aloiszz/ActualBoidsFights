@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DrawRay : MonoBehaviour
 {
@@ -20,7 +22,10 @@ public class DrawRay : MonoBehaviour
     public float slowMotionTimescale;
     private float startTimescale;
     private float startFixedDeltaTime;
-    
+
+    [SerializeField] private GameObject flockDetails;
+    [SerializeField] private Toggle toggleEngagementAuto;
+
     private RaycastHit hit;
     private Ray ray;
 
@@ -33,6 +38,9 @@ public class DrawRay : MonoBehaviour
         
         startTimescale = Time.timeScale;
         startFixedDeltaTime = Time.fixedDeltaTime;
+        
+        flockDetails.SetActive(false);
+        toggleEngagementAuto.isOn = true;
     }
 
     void FindFlock()
@@ -40,12 +48,17 @@ public class DrawRay : MonoBehaviour
         flocks = GameObject.FindGameObjectsWithTag("Flock");
     }
 
+    private void FixedUpdate()
+    {
+        FlockDetails();
+    }
+
     // Update is called once per frame
     void Update()
     {
         ShowFps(); // permet de voir le frame rate 
         SlowMotion();
-        
+
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             DrawRayScreentToWorldPoint();
@@ -77,20 +90,19 @@ public class DrawRay : MonoBehaviour
             if (Physics.Raycast(ray, out hit, 10000))
             {
                 
-                if (hit.collider.CompareTag("Terrain")) // Unit Selected and moving toward position
-                {
-                    Debug.DrawRay(ray.origin - new Vector3(0,-1,0) , ray.direction * 10000, Color.green, 1, false);
-                    flock.transform.gameObject.GetComponent<Flock>().centerRadius = new Vector3(hit.point.x,  flock.transform.gameObject.GetComponent<Flock>().heightOfFlocks, hit.point.z); // Radius limite de la flock
-                    flock.transform.transform.position = flock.transform.gameObject.GetComponent<Flock>().centerRadius;
-                    DeSelectUnit();
-                }
-
                 if (flock == null)
                 {
                     WhenNoUnitIsSelected();
                 }
                 else
                 {
+                    if (hit.collider.CompareTag("Terrain")) // Unit Selected and moving toward position
+                    {
+                        Debug.DrawRay(ray.origin - new Vector3(0,-1,0) , ray.direction * 10000, Color.green, 1, false);
+                        flock.transform.gameObject.GetComponent<Flock>().centerRadius = new Vector3(hit.point.x,  flock.transform.gameObject.GetComponent<Flock>().heightOfFlocks, hit.point.z); // Radius limite de la flock
+                        flock.transform.transform.position = flock.transform.gameObject.GetComponent<Flock>().centerRadius;
+                        //DeSelectUnit();
+                    }
                     WhenAUnitIsSelected();
                 }
 
@@ -153,7 +165,7 @@ public class DrawRay : MonoBehaviour
         }
         else
         {
-            if ( hit.transform.gameObject.layer == LayerMask.NameToLayer("Flock")) // Unit Selected
+            if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Flock")) // Unit Selected
             {
                 hit.transform.gameObject.GetComponent<Flock>().isUnitSelected = true;
                 flock2 = hit.transform.gameObject;
@@ -245,6 +257,38 @@ public class DrawRay : MonoBehaviour
         {
             Time.timeScale = startTimescale;
             Time.fixedDeltaTime = startFixedDeltaTime;
+        }
+    }
+    
+    
+    bool eventTrigger;
+    void FlockDetails()
+    {
+        
+        if (flock != null)
+        {
+            flockDetails.SetActive(true);
+            toggleEngagementAuto.isOn = flock.transform.gameObject.GetComponent<Flock>().canEngageAuto;
+            
+        }
+        else
+        {
+            toggleEngagementAuto.isOn = true;
+            flockDetails.SetActive(false);
+        }
+    }
+
+    public void EngagementAuto()
+    {
+        if (flock.transform.gameObject.GetComponent<Flock>().canEngageAuto)
+        {
+            flock.transform.gameObject.GetComponent<Flock>().canEngageAuto = false;
+            toggleEngagementAuto.isOn = false;
+        }
+        else
+        {
+            flock.transform.gameObject.GetComponent<Flock>().canEngageAuto = true;
+            toggleEngagementAuto.isOn = true;
         }
     }
 }

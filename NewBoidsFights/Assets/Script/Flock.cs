@@ -67,7 +67,7 @@ public class Flock : MonoBehaviour
     [HideInInspector]public Color colorSelection;
 
     [BoxGroup("Flock")] 
-    [HideInInspector]public float heightOfFlocks = 10;
+    public float heightOfFlocks = 15;
     public Vector3 centerRadius; //récupération du centre Radius depuis SO RadiusBehavior
     private float radius; //récupération du Radius depuis SO RadiusBehavior
 

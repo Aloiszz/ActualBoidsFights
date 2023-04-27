@@ -230,5 +230,5 @@ MonoBehaviour:
   isUnitEnnemy: 0
   isUnitShooting: 0
   colorSelection: {r: 0, g: 0, b: 0, a: 0}
-  heightOfFlocks: 10
+  heightOfFlocks: 15
   centerRadius: {x: 0, y: 0, z: 0}
