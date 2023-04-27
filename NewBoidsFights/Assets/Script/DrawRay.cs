@@ -14,6 +14,13 @@ public class DrawRay : MonoBehaviour
     [SerializeField] private TextMeshProUGUI  _UnitSelected;
     [SerializeField] private TextMeshProUGUI  _UnitType;
     
+    public TextMeshProUGUI fpsText;
+    private float deltaTime;
+    
+    public float slowMotionTimescale;
+    private float startTimescale;
+    private float startFixedDeltaTime;
+    
     private RaycastHit hit;
     private Ray ray;
 
@@ -23,6 +30,9 @@ public class DrawRay : MonoBehaviour
     {
         cam = Camera.main;
         Invoke(nameof(FindFlock), 0.01f);
+        
+        startTimescale = Time.timeScale;
+        startFixedDeltaTime = Time.fixedDeltaTime;
     }
 
     void FindFlock()
@@ -33,6 +43,9 @@ public class DrawRay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        ShowFps(); // permet de voir le frame rate 
+        SlowMotion();
+        
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             DrawRayScreentToWorldPoint();
@@ -196,5 +209,42 @@ public class DrawRay : MonoBehaviour
         GUILayout.Label("World position: " + point.ToString("F3"));
         GUILayout.EndArea();
         
+    }
+
+    void ShowFps()
+    {
+        deltaTime += (Time.deltaTime - deltaTime) * 0.1f;
+        float fps = 1.0f / deltaTime;
+        fpsText.text = "Frame Rate : " + Mathf.Ceil (fps).ToString ();
+
+        if (fps > 60)
+        {
+            fpsText.color = Color.green;
+        }
+        else if (fps < 60 || fps > 30)
+        {
+            fpsText.color = Color.yellow;
+        } 
+        
+        if (fps < 30)
+        {
+            fpsText.color = Color.red;
+        }
+    }
+
+
+    void SlowMotion()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Time.timeScale = slowMotionTimescale;
+            Time.fixedDeltaTime = startFixedDeltaTime * slowMotionTimescale;
+        }
+
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            Time.timeScale = startTimescale;
+            Time.fixedDeltaTime = startFixedDeltaTime;
+        }
     }
 }

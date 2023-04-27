@@ -17,7 +17,7 @@ public class FlockManager : MonoBehaviour
     [Header("General Settings Flocks")]
     // public FlockType currentFlock;
     public int howManyAlliesFlocks;
-    [SerializeField] int indexAllies;
+    int indexAllies;
     [BoxGroup("General Settings Flocks")]
     public List<FlockType> currentFlock;
 
@@ -30,7 +30,7 @@ public class FlockManager : MonoBehaviour
 
     
 
-    [HideInInspector] public static float heightOfFlocks = 10;
+    [HideInInspector] public static float heightOfFlocks = 15;
     private Vector3 whereToSpawn = new Vector3(-50,heightOfFlocks,-40);
     [BoxGroup("Flock Creation")]
     [HideInInspector]public List<Vector3> WhereToSpawns = new List<Vector3>() ;
@@ -133,7 +133,7 @@ public class FlockManager : MonoBehaviour
     public void AjouterAllierAerien()
     {
         currentFlock.Add(FlockType.Aerien);
-        InstantiateAlliesFlock();
+        //InstantiateAlliesFlock();
     }
     
     [Button()]
