@@ -89,23 +89,26 @@ public class DrawRay : MonoBehaviour
             
             if (Physics.Raycast(ray, out hit, 10000))
             {
-                
                 if (flock == null)
                 {
                     WhenNoUnitIsSelected();
                 }
                 else
                 {
-                    if (hit.collider.CompareTag("Terrain")) // Unit Selected and moving toward position
+                    if (hit.transform.gameObject.layer != LayerMask.NameToLayer("btn"))
                     {
-                        Debug.DrawRay(ray.origin - new Vector3(0,-1,0) , ray.direction * 10000, Color.green, 1, false);
-                        flock.transform.gameObject.GetComponent<Flock>().centerRadius = new Vector3(hit.point.x,  flock.transform.gameObject.GetComponent<Flock>().heightOfFlocks, hit.point.z); // Radius limite de la flock
-                        flock.transform.transform.position = flock.transform.gameObject.GetComponent<Flock>().centerRadius;
-                        //DeSelectUnit();
+                        Debug.Log(hit.transform.gameObject.name);
+                        if (hit.collider.CompareTag("Terrain")) // Unit Selected and moving toward position
+                        {
+                            Debug.DrawRay(ray.origin - new Vector3(0,-1,0) , ray.direction * 10000, Color.green, 1, false);
+                            flock.transform.gameObject.GetComponent<Flock>().centerRadius = new Vector3(hit.point.x,  flock.transform.gameObject.GetComponent<Flock>().heightOfFlocks, hit.point.z); // Radius limite de la flock
+                            flock.transform.transform.position = flock.transform.gameObject.GetComponent<Flock>().centerRadius;
+                            DeSelectUnit();
+                        }
                     }
+
                     WhenAUnitIsSelected();
                 }
-
             }
         }
     }
