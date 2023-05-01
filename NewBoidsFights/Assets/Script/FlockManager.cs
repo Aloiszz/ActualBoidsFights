@@ -18,6 +18,8 @@ public class FlockManager : MonoBehaviour
     // public FlockType currentFlock;
     public int howManyAlliesFlocks;
     int indexAllies;
+    [HideInInspector] public int howManyAirUnit;  
+    [HideInInspector] public int howManyGroundUnit; 
     [BoxGroup("General Settings Flocks")]
     public List<FlockType> currentFlock;
 
@@ -25,6 +27,8 @@ public class FlockManager : MonoBehaviour
     [BoxGroup("General Settings Flocks")]
     public int howManyEnnemiFlocks;
     private int indexEnnemis;
+    [HideInInspector] public int howManyAirEnnemiesUnit;  
+    [HideInInspector] public int howManyGroundEnnemiesUnit; 
     [BoxGroup("General Settings Flocks")]
     public List<FlockType> currentFlockEnnemi;
 
@@ -87,6 +91,8 @@ public class FlockManager : MonoBehaviour
     {
         InstantiateAlliesFlock();
         InstantiateEnnemiesFlock();
+        
+        DontDestroyOnLoad(this);
     }
 
     void InstantiateAlliesFlock()
@@ -133,6 +139,7 @@ public class FlockManager : MonoBehaviour
     public void AjouterAllierAerien()
     {
         currentFlock.Add(FlockType.Aerien);
+        howManyAirUnit++;
         //InstantiateAlliesFlock();
     }
     
@@ -140,10 +147,13 @@ public class FlockManager : MonoBehaviour
     public void AjouterAllierTerrestre()
     {
         currentFlock.Add(FlockType.Terrestre);
+        howManyGroundUnit++;
     }
     [Button()]
     public void RemoveAllAllies()
     {
+        howManyAirUnit = 0;
+        howManyGroundUnit = 0;
         currentFlock.Clear();
     }
 
@@ -158,16 +168,20 @@ public class FlockManager : MonoBehaviour
     public void AjouterEnnemieAerien()
     {
         currentFlockEnnemi.Add(FlockType.Aerien);
+        howManyAirEnnemiesUnit++;
     }
     
     [Button()]
     public void AjouterEnnemieTerrestre()
     {
+        howManyGroundEnnemiesUnit++;
         currentFlockEnnemi.Add(FlockType.Terrestre);
     }
     [Button()]
     public void RemoveAllEnnemis()
     {
+        howManyAirEnnemiesUnit = 0;
+        howManyGroundEnnemiesUnit = 0;
         currentFlockEnnemi.Clear();
     }
     

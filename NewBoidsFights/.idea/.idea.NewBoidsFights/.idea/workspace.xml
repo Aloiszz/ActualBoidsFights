@@ -9,6 +9,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Script/MainCamera.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Script/Menu.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/Graphic.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../Caverne-Merveilleuse/CarverneMerveilleuse/Assets/Script/Camera/CinemachineShake.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../Unity Project/BoidsFights/Assets/CustomEditorWindow/Editor/CompositeBehaviorEditor.cs" root0="SKIP_HIGHLIGHTING" />
@@ -81,7 +82,7 @@
       <workItem from="1682165258091" duration="4979000" />
       <workItem from="1682585258862" duration="15696000" />
       <workItem from="1682671749326" duration="1787000" />
-      <workItem from="1682942793007" duration="4922000" />
+      <workItem from="1682942793007" duration="8771000" />
     </task>
     <servers />
   </component>
