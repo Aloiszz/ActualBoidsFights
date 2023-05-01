@@ -133,7 +133,8 @@ public class Flock : MonoBehaviour
         squareNeighborRadius = neighborRadius * neighborRadius;
         squareAvoidanceRadius = squareNeighborRadius * avoidanceRadiusMultiplier * avoidanceRadiusMultiplier;
 
-
+        actualNumberOfAgent = startingCount;
+        
         _SphereFlockSelection = GameObject.FindGameObjectWithTag("SphereIndication");
         
         Invoke(nameof(ChooseColorFlock), 0.01f);
@@ -167,6 +168,7 @@ public class Flock : MonoBehaviour
                 FlockManager.instance.transform
             );
             newAgent.name = "Flock Aerien "+ (FlockManager.instance.countLocation) + " Agent " + i;
+            newAgent.whichFlockCameFrom = this;
             if (isUnitEnnemy)
             {
                 newAgent.isEnnemy = true;
@@ -190,6 +192,7 @@ public class Flock : MonoBehaviour
                 FlockManager.instance.transform
             );
             newAgent.name = "Flock Terrestre "+ (FlockManager.instance.countLocation) + " Agent " + i;
+            newAgent.whichFlockCameFrom = this;
             if (isUnitEnnemy)
             {
                 newAgent.isEnnemy = true;
@@ -251,6 +254,8 @@ public class Flock : MonoBehaviour
         Gizmos.color = new Color(1,0.92f,.016f,.5f);
         Gizmos.DrawSphere(centerRadius, radiusBehavior.radius);
     }
+    
+    
 
     void Update()
     {
@@ -310,7 +315,7 @@ public class Flock : MonoBehaviour
             }
             
             Combat();
-
+            VerifAgent();
         }
     }
 
@@ -348,7 +353,19 @@ public class Flock : MonoBehaviour
             //isUnitShooting = false;
             squareMaxSpeed = maxSpeed * maxSpeed;
         }
-        
+    }
+
+    public int actualNumberOfAgent = 1;
+    void VerifAgent()
+    {
+        if (actualNumberOfAgent <= 0)
+        {
+            foreach (var agent in agents)
+            {
+                Destroy(agent);
+            }
+            Destroy(gameObject);
+        }
     }
 
     IEnumerator CombatHIHI()
@@ -389,7 +406,7 @@ public class Flock : MonoBehaviour
 
         return centerOffset * t * t;
     }
-
+    
     List<Transform> GetNearbyObjects(FlockAgent agent)
     {
         List<Transform> context = new List<Transform>();

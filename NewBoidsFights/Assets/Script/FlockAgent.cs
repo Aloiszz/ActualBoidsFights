@@ -50,6 +50,8 @@ public class FlockAgent : MonoBehaviour
     
     public Transform ObjectLook;
     private GameObject LookAt;
+
+    [HideInInspector] public Flock whichFlockCameFrom; // savoir a qui appartient la flock 
     
     public Collider AgentCollider
     {
@@ -105,14 +107,15 @@ public class FlockAgent : MonoBehaviour
                     {
                         Debug.DrawRay(ray.origin, ray.direction * RayDistance , Color.green);
                         hitData.collider.GetComponent<FlockAgent>().HealtPoint -= damage;
-                        //Destroy(hitData.transform.gameObject);
+                        
                         if (hitData.collider.GetComponent<FlockAgent>().HealtPoint <= 0)
                         {
                             hitData.transform.gameObject.SetActive(false);
+                            hitData.collider.GetComponent<FlockAgent>().whichFlockCameFrom.actualNumberOfAgent--;
                         }
                         Debug.LogWarning(hitData.transform.name + " Was Killed by " + transform.name);
                         //isAttacking = false;
-                        //Attacking();
+                        Attacking();
                     }
                 }
                 else
@@ -125,10 +128,11 @@ public class FlockAgent : MonoBehaviour
                         if (hitData.collider.GetComponent<FlockAgent>().HealtPoint <= 0)
                         {
                             hitData.transform.gameObject.SetActive(false);
+                            hitData.collider.GetComponent<FlockAgent>().whichFlockCameFrom.actualNumberOfAgent--;
                         }
                         Debug.LogWarning(hitData.transform.name + " Was Killed by " + transform.name);
                         //isAttacking = false;
-                        //Attacking();
+                        Attacking();
                     }
                 }
             }
@@ -159,19 +163,36 @@ public class FlockAgent : MonoBehaviour
             if (!isShooting)
             {
                 isShooting = true;
-                StartCoroutine(Shooting());
+                StartCoroutine(Shooting(isEnnemy));
             }
             
         }
     }
 
-    IEnumerator Shooting()
+    IEnumerator Shooting(bool isEnnemy)
     {
-        GameObject Ammo = Instantiate(ammo, canon1.transform.position, transform.rotation);
-        Destroy(Ammo, 1);
-        GameObject Ammo2 = Instantiate(ammo, canon2.transform.position, transform.rotation);
-        Destroy(Ammo2, 1);
-        yield return new WaitForSeconds(1f);
-        isShooting = false;
+        if (isEnnemy)
+        {
+            GameObject Ammo = Instantiate(ammo, canon1.transform.position, transform.rotation);
+            Destroy(Ammo, 1);
+            GameObject Ammo2 = Instantiate(ammo, canon2.transform.position, transform.rotation);
+            Destroy(Ammo2, 1);
+            yield return new WaitForSeconds(1f);
+            isShooting = false;
+        }
+        else
+        {
+            GameObject Ammo = Instantiate(ammo, canon1.transform.position, transform.rotation);
+            Ammo.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.blue );;
+            Ammo.GetComponentInChildren<TrailRenderer>().material.SetColor("_EmissionColor", Color.blue *0.05f );;
+            Destroy(Ammo, 1);
+            GameObject Ammo2 = Instantiate(ammo, canon2.transform.position, transform.rotation);
+            Ammo2.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.blue);;
+            Ammo2.GetComponentInChildren<TrailRenderer>().material.SetColor("_EmissionColor", Color.blue * 0.05f);;
+            Destroy(Ammo2, 1);
+            yield return new WaitForSeconds(1f);
+            isShooting = false;
+        }
+        
     }
 }
