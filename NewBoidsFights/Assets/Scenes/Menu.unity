@@ -351,7 +351,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -672,8 +672,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2043059272}
-        m_TargetAssemblyTypeName: FlockManager, Assembly-CSharp
+      - m_Target: {fileID: 2092255507}
+        m_TargetAssemblyTypeName: Menu, Assembly-CSharp
         m_MethodName: RemoveAllAllies
         m_Mode: 1
         m_Arguments:
@@ -1192,7 +1192,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -1306,8 +1306,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1856,8 +1856,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -3741,8 +3741,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2043059272}
-        m_TargetAssemblyTypeName: FlockManager, Assembly-CSharp
+      - m_Target: {fileID: 2092255507}
+        m_TargetAssemblyTypeName: Menu, Assembly-CSharp
         m_MethodName: AjouterAllierAerien
         m_Mode: 1
         m_Arguments:
@@ -4063,8 +4063,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2043059272}
-        m_TargetAssemblyTypeName: FlockManager, Assembly-CSharp
+      - m_Target: {fileID: 2092255507}
+        m_TargetAssemblyTypeName: Menu, Assembly-CSharp
         m_MethodName: RemoveAllEnnemis
         m_Mode: 1
         m_Arguments:
@@ -4150,7 +4150,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 704, y: -396.14316}
+  m_AnchoredPosition: {x: 571, y: -396.14316}
   m_SizeDelta: {x: 378.5493, y: 74.3889}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1010611484
@@ -4175,7 +4175,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.9622642, g: 0, b: 0, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -4955,7 +4955,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 700, y: -113.97}
+  m_AnchoredPosition: {x: 567, y: -113.97}
   m_SizeDelta: {x: 378.5493, y: 74.3889}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1228093104
@@ -4980,7 +4980,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.38248965, g: 1, b: 0.15566039, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -5470,8 +5470,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2043059272}
-        m_TargetAssemblyTypeName: FlockManager, Assembly-CSharp
+      - m_Target: {fileID: 2092255507}
+        m_TargetAssemblyTypeName: Menu, Assembly-CSharp
         m_MethodName: AjouterEnnemieTerrestre
         m_Mode: 1
         m_Arguments:
@@ -6122,8 +6122,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2043059272}
-        m_TargetAssemblyTypeName: FlockManager, Assembly-CSharp
+      - m_Target: {fileID: 2092255507}
+        m_TargetAssemblyTypeName: Menu, Assembly-CSharp
         m_MethodName: AjouterEnnemieAerien
         m_Mode: 1
         m_Arguments:
@@ -6409,7 +6409,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 700, y: -250}
+  m_AnchoredPosition: {x: 567, y: -250}
   m_SizeDelta: {x: 378.5493, y: 74.3889}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1543085897
@@ -6434,7 +6434,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.9788537, g: 0, b: 1, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -7746,7 +7746,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -8269,8 +8269,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2043059272}
-        m_TargetAssemblyTypeName: FlockManager, Assembly-CSharp
+      - m_Target: {fileID: 2092255507}
+        m_TargetAssemblyTypeName: Menu, Assembly-CSharp
         m_MethodName: AjouterAllierTerrestre
         m_Mode: 1
         m_Arguments:
@@ -8404,14 +8404,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flock: {fileID: 3429564234414965306, guid: 4681877deea41254a986cedf2edfc20b, type: 3}
-  howManyAlliesFlocks: 0
+  howManyAlliesFlocks: 1
   howManyAirUnit: 1
   howManyGroundUnit: 0
-  currentFlock: 00000000
-  howManyEnnemiFlocks: 0
+  currentFlock: 
+  howManyEnnemiFlocks: 1
   howManyAirEnnemiesUnit: 1
   howManyGroundEnnemiesUnit: 0
-  currentFlockEnnemi: 00000000
+  currentFlockEnnemi: 
   WhereToSpawns: []
   count: 2
   countLocation: 0
@@ -8675,6 +8675,10 @@ MonoBehaviour:
   numberofUnitEnnemeis: {fileID: 836869114}
   numberofAirennemeisUnit: {fileID: 510600718}
   numberofGroundEnnemeisUnit: {fileID: 1992617410}
+  howManyAirUnit: 0
+  howManyGroundUnit: 0
+  howManyAirEnnemiesUnit: 0
+  howManyGroundEnnemiesUnit: 0
 --- !u!1001 &2101972752
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -34,23 +35,32 @@ public class Menu : MonoBehaviour
     public TextMeshProUGUI numberofGroundUnit;
     [Space]
     public Button RemoveAllAllies;*/
-    
+
+    public static Menu instance;
+
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
     void Start()
     {
         main.SetActive(true);
         config.SetActive(false);
+        DontDestroyOnLoad(this);
     }
 
     // Update is called once per frame
     void Update()
     {
-        numberofUnit.text = "X " + FlockManager.instance.currentFlock.Count;
-        numberofAirUnit.text = "X " + FlockManager.instance.howManyAirUnit;
-        numberofGroundUnit.text = "X " + FlockManager.instance.howManyGroundUnit;
+        numberofUnit.text = "X " + (howManyAirUnit+howManyGroundUnit);
+        numberofAirUnit.text = "X " + howManyAirUnit;
+        numberofGroundUnit.text = "X " + howManyGroundUnit;
         
-        numberofUnitEnnemeis.text = "X " + FlockManager.instance.currentFlockEnnemi.Count;
-        numberofAirennemeisUnit.text = "X " + FlockManager.instance.howManyAirEnnemiesUnit;
-        numberofGroundEnnemeisUnit.text = "X " + FlockManager.instance.howManyGroundEnnemiesUnit;
+        numberofUnitEnnemeis.text = "X " + (howManyAirEnnemiesUnit+howManyGroundEnnemiesUnit);
+        numberofAirennemeisUnit.text = "X " + howManyAirEnnemiesUnit;
+        numberofGroundEnnemeisUnit.text = "X " + howManyGroundEnnemiesUnit;
     }
 
 

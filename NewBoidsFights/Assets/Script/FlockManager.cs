@@ -59,8 +59,13 @@ public class FlockManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
-
-        if (currentFlock.Count == 0)
+        
+        GetMenuValues(); // récup Info des menu de selection;
+        
+    }
+    void Start()
+    {
+        /*if (currentFlock.Count == 0)
         {
             for (int j = 0; j < howManyAlliesFlocks; j++)
             {
@@ -82,17 +87,49 @@ public class FlockManager : MonoBehaviour
         else
         {
             howManyEnnemiFlocks = currentFlockEnnemi.Count;
+        }*/
+
+        if (howManyAlliesFlocks == 0 && currentFlock.Count == 0)
+        {
+            howManyAlliesFlocks++;
+            currentFlock.Add(FlockType.Aerien);
+        }
+
+        if (howManyEnnemiFlocks == 0&& currentFlockEnnemi.Count == 0)
+        {
+            howManyEnnemiFlocks++;
+            currentFlockEnnemi.Add(FlockType.Aerien);
         }
         
         
-    }
-
-    void Start()
-    {
         InstantiateAlliesFlock();
         InstantiateEnnemiesFlock();
         
         //DontDestroyOnLoad(this);
+    }
+    
+    
+    void GetMenuValues()
+    {
+        howManyAlliesFlocks = Menu.instance.howManyAirUnit + Menu.instance.howManyGroundUnit;
+        for (int i = 0; i < Menu.instance.howManyAirUnit; i++)
+        {
+            AjouterAllierAerien();
+        }
+        for (int i = 0; i < Menu.instance.howManyGroundUnit; i++)
+        {
+            AjouterAllierTerrestre();
+        }
+
+        howManyEnnemiFlocks = Menu.instance.howManyAirEnnemiesUnit + Menu.instance.howManyGroundEnnemiesUnit;
+        for (int i = 0; i < Menu.instance.howManyAirEnnemiesUnit; i++)
+        {
+            AjouterEnnemieAerien();
+        }
+        for (int i = 0; i < Menu.instance.howManyGroundEnnemiesUnit; i++)
+        {
+            AjouterEnnemieTerrestre();
+        }
     }
 
     void InstantiateAlliesFlock()

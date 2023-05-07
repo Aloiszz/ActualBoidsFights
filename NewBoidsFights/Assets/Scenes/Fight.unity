@@ -624,7 +624,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 2.5
+  m_Intensity: 2
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -681,14 +681,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 155376065}
-  m_LocalRotation: {x: 0.2368986, y: -0.7653506, z: 0.2114089, w: 0.55984265}
+  m_LocalRotation: {x: 0.18356836, y: -0.73831403, z: 0.16944458, w: 0.626485}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 36.076, y: -110.554, z: -8.962}
+  m_LocalEulerAnglesHint: {x: 28.699, y: -100.351, z: -3.841}
 --- !u!1 &161687156
 GameObject:
   m_ObjectHideFlags: 0
@@ -5936,11 +5936,11 @@ MonoBehaviour:
   howManyAlliesFlocks: 1
   howManyAirUnit: 1
   howManyGroundUnit: 0
-  currentFlock: 00000000
+  currentFlock: 
   howManyEnnemiFlocks: 1
   howManyAirEnnemiesUnit: 2
   howManyGroundEnnemiesUnit: 0
-  currentFlockEnnemi: 00000000
+  currentFlockEnnemi: 
   WhereToSpawns: []
   count: 2
   countLocation: 0

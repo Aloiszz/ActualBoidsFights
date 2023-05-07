@@ -16,19 +16,6 @@ public class Flock : MonoBehaviour
     public FLockBehavior behavior;
     public StayInRadiusBehavior radiusBehavior;
 
-    [Range(1, 1500)] 
-    public int startingCount = 250; // Population de flock Instantié
-    public float AgentDensity = 0.01f;
-
-    [Range(1f, 100f)] 
-    public float driveFactor = 10f;
-    
-    [Range(1f, 10f)] 
-    public float neighborRadius = 1.5f;
-
-    [Range(0f, 1f)] 
-    public float avoidanceRadiusMultiplier = 0.5f;
-
     private float squareMaxSpeed;
     private float squareNeighborRadius;
     private float squareAvoidanceRadius;
@@ -59,6 +46,21 @@ public class Flock : MonoBehaviour
     [BoxGroup("Flock")]
     [Range(1f, 100f)] 
     public float CombatDeplacement = 30f;
+    [BoxGroup("Flock")]
+    [Range(1, 1500)] 
+    public int startingCount = 250; // Population de flock Instantié
+    [BoxGroup("Flock")]
+    public float AgentDensity = 0.01f;
+
+    [BoxGroup("Flock")]
+    [Range(1f, 100f)] 
+    public float driveFactor = 10f;
+    [BoxGroup("Flock")]
+    [Range(1f, 10f)] 
+    public float neighborRadius = 1.5f;
+    [BoxGroup("Flock")]
+    [Range(0f, 1f)] 
+    public float avoidanceRadiusMultiplier = 0.5f;
 
 
     [BoxGroup("Flock")]
@@ -75,7 +77,7 @@ public class Flock : MonoBehaviour
 
     [BoxGroup("Flock")] 
     public float heightOfFlocks = 15;
-    public Vector3 centerRadius; //récupération du centre Radius depuis SO RadiusBehavior
+    [HideInInspector]public Vector3 centerRadius; //récupération du centre Radius depuis SO RadiusBehavior
     private float radius; //récupération du Radius depuis SO RadiusBehavior
 
     public float SquareAvoidanceRadius
@@ -130,9 +132,7 @@ public class Flock : MonoBehaviour
         radius = radiusBehavior.radius;
         keepSpeedDeplacement = speedDeplacement;
     }
-
     
-
     void Start()
     {
         Secure_SO();
@@ -361,7 +361,7 @@ public class Flock : MonoBehaviour
         }
     }
 
-    public int actualNumberOfAgent = 1;
+    [HideInInspector] public int actualNumberOfAgent = 1;
     void VerifAgent()
     {
         if (actualNumberOfAgent <= 0)
