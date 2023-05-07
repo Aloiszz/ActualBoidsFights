@@ -15,6 +15,7 @@ public class DrawRay : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI  _UnitSelected;
     [SerializeField] private TextMeshProUGUI  _UnitType;
+    [SerializeField] private TextMeshProUGUI  _isEngaged;
     
     public TextMeshProUGUI fpsText;
     private float deltaTime;
@@ -50,7 +51,7 @@ public class DrawRay : MonoBehaviour
 
     private void FixedUpdate()
     {
-        FlockDetails();
+        
     }
 
     // Update is called once per frame
@@ -58,6 +59,7 @@ public class DrawRay : MonoBehaviour
     {
         ShowFps(); // permet de voir le frame rate 
         SlowMotion();
+        FlockDetails();
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
@@ -73,11 +75,13 @@ public class DrawRay : MonoBehaviour
         {
             _UnitSelected.text = "Unit Selected : ";
             _UnitType.text = "Unit Type : ";
+            _isEngaged.text = "Is Engaged: ";
         }
         else
         {
             _UnitSelected.text = "Unit Selected : " + flock.name + " is ennemy " + flock.GetComponent<Flock>().isUnitEnnemy;
             _UnitType.text = "Unit Type : " + flock.GetComponent<Flock>().currentFlock.ToString();
+            _isEngaged.text = "Is Engaged: " + flock.GetComponent<Flock>().canEngageAuto;
         }
     }
     
@@ -134,6 +138,7 @@ public class DrawRay : MonoBehaviour
             {
                 hit.transform.gameObject.GetComponent<Flock>().isUnitSelected = true;
                 flock = hit.transform.gameObject;
+                toggleEngagementAuto.isOn = flock.transform.gameObject.GetComponent<Flock>().canEngageAuto;
                 Debug.DrawRay(ray.origin  - new Vector3(0,-1,0), ray.direction * 10000, Color.blue, 1, false);
                 
                 hit.transform.gameObject.GetComponent<Flock>().colorSelection.a = 0.2f;
@@ -267,16 +272,13 @@ public class DrawRay : MonoBehaviour
     bool eventTrigger;
     void FlockDetails()
     {
-        
         if (flock != null)
         {
             flockDetails.SetActive(true);
-            toggleEngagementAuto.isOn = flock.transform.gameObject.GetComponent<Flock>().canEngageAuto;
-            
         }
         else
         {
-            toggleEngagementAuto.isOn = true;
+            //toggleEngagementAuto.isOn = false;
             flockDetails.SetActive(false);
         }
     }

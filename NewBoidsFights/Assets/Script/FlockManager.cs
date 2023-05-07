@@ -92,7 +92,7 @@ public class FlockManager : MonoBehaviour
         InstantiateAlliesFlock();
         InstantiateEnnemiesFlock();
         
-        DontDestroyOnLoad(this);
+        //DontDestroyOnLoad(this);
     }
 
     void InstantiateAlliesFlock()

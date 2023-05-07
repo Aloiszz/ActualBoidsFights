@@ -214,7 +214,7 @@ MonoBehaviour:
     type: 3}
   behavior: {fileID: 11400000, guid: 2c7788aedc599964ab860d5cd48232d6, type: 2}
   radiusBehavior: {fileID: 11400000, guid: 07b9bb68e0e6fe64caa48e7c95ec7fbe, type: 2}
-  startingCount: 25
+  startingCount: 30
   AgentDensity: 0.5
   driveFactor: 10
   maxSpeed: 20
@@ -232,3 +232,4 @@ MonoBehaviour:
   colorSelection: {r: 0, g: 0, b: 0, a: 0}
   heightOfFlocks: 15
   centerRadius: {x: 0, y: 0, z: 0}
+  actualNumberOfAgent: 1

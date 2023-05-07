@@ -67,7 +67,7 @@ public class FlockAgent : MonoBehaviour
         healtBar.color = healtBarColor.Evaluate(transitionGrandient);
         
         //ObjectLook = transform.GetComponent<Transform>();
-        LookAt = GameObject.FindGameObjectWithTag("MainCamera");
+        
         
         healtPointMax = HealtPoint;
     }
@@ -75,9 +75,10 @@ public class FlockAgent : MonoBehaviour
     {
         if (ObjectLook)
         {
+            LookAt = GameObject.FindGameObjectWithTag("MainCamera");
             ObjectLook.LookAt(2 * ObjectLook.position - LookAt.transform.position);
         }
-        
+
         transitionGrandient = (HealtPoint / healtPointMax);
         healtBar.color = healtBarColor.Evaluate(transitionGrandient);
         

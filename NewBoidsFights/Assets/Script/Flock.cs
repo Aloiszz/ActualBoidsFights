@@ -23,9 +23,6 @@ public class Flock : MonoBehaviour
     [Range(1f, 100f)] 
     public float driveFactor = 10f;
     
-    [Range(1f, 100f)] 
-    public float maxSpeed = 5f;
-
     [Range(1f, 10f)] 
     public float neighborRadius = 1.5f;
 
@@ -54,6 +51,16 @@ public class Flock : MonoBehaviour
     [BoxGroup("Flock")]
     public bool canEngageAuto = true; // permet d'engager les flocks ennemy can entre dans la range
     
+    [BoxGroup("Flock")]
+    [Header("Deplacement")]
+    [Range(1f, 100f)] 
+    public float speedDeplacement = 20f;
+    private float keepSpeedDeplacement;
+    [BoxGroup("Flock")]
+    [Range(1f, 100f)] 
+    public float CombatDeplacement = 30f;
+
+
     [BoxGroup("Flock")]
     [Header("Information about flock")]
     public bool isUnitSelected; // Savoir si unité 
@@ -95,7 +102,7 @@ public class Flock : MonoBehaviour
                     centerRadius.y = 0;
                     heightOfFlocks = 0;
                     transform.position = centerRadius;
-                    maxSpeed = 10;
+                    speedDeplacement = 10;
                     avoidanceRadiusMultiplier = 1;
                     neighborRadius = 1;
                     break;
@@ -113,7 +120,7 @@ public class Flock : MonoBehaviour
                     centerRadius.y = 0;
                     heightOfFlocks = 0;
                     transform.position = centerRadius;
-                    maxSpeed = 10;
+                    speedDeplacement = 10;
                     avoidanceRadiusMultiplier = 1;
                     neighborRadius = 1;
                     break;
@@ -121,6 +128,7 @@ public class Flock : MonoBehaviour
         }
         
         radius = radiusBehavior.radius;
+        keepSpeedDeplacement = speedDeplacement;
     }
 
     
@@ -129,7 +137,7 @@ public class Flock : MonoBehaviour
     {
         Secure_SO();
 
-        squareMaxSpeed = maxSpeed * maxSpeed;
+        squareMaxSpeed = speedDeplacement * speedDeplacement;
         squareNeighborRadius = neighborRadius * neighborRadius;
         squareAvoidanceRadius = squareNeighborRadius * avoidanceRadiusMultiplier * avoidanceRadiusMultiplier;
 
@@ -232,7 +240,7 @@ public class Flock : MonoBehaviour
                 agent.GetComponent<Renderer>().material.color = color;
             }
             colorSelection = color;
-            colorSelection.a = 0.05f;
+            colorSelection.a = 0.1f;
             gameObject.transform.GetChild(0).GetComponentInChildren<Renderer>().material.color = colorSelection;
         }
         else
@@ -243,7 +251,7 @@ public class Flock : MonoBehaviour
                 agent.GetComponent<Renderer>().material.color = color;
             }
             colorSelection = color;
-            colorSelection.a = 0.05f;
+            colorSelection.a = 0.1f;
             gameObject.transform.GetChild(0).GetComponentInChildren<Renderer>().material.color = colorSelection;
         }
         
@@ -268,7 +276,7 @@ public class Flock : MonoBehaviour
             {
                 Vector3 move = behavior.CalculateMove(agent, context, this);
                 
-                Vector3 partialMove = StayInRadius(agent);
+                Vector3 partialMove = StayInRadius(agent); /// ICI QUE JAPELLE LA FONCTION 
                 if (partialMove != Vector3.zero)
                 {
                     if (partialMove.sqrMagnitude < 0.01f * 0.01f)
@@ -284,7 +292,7 @@ public class Flock : MonoBehaviour
                 move *= driveFactor;
                 if (move.sqrMagnitude > squareMaxSpeed)
                 {
-                    move = move.normalized * maxSpeed;
+                    move = move.normalized * speedDeplacement;
                 }
                 agent.Move(move);
             }
@@ -309,7 +317,7 @@ public class Flock : MonoBehaviour
                 move *= driveFactor;
                 if (move.sqrMagnitude > squareMaxSpeed)
                 {
-                    move = move.normalized * maxSpeed;
+                    move = move.normalized * speedDeplacement;
                 }
                 agent.Move(move);
             }
@@ -345,13 +353,11 @@ public class Flock : MonoBehaviour
         //Shoot();
         if (isCombat)
         {
-            //isUnitShooting = true;
-            squareMaxSpeed = (maxSpeed + 10) * (maxSpeed + 10) ;
+            speedDeplacement = CombatDeplacement;
         }
         else
         {
-            //isUnitShooting = false;
-            squareMaxSpeed = maxSpeed * maxSpeed;
+            speedDeplacement = keepSpeedDeplacement;
         }
     }
 

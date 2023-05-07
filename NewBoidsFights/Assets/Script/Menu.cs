@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using NaughtyAttributes;
 
 
 public class Menu : MonoBehaviour
@@ -75,4 +76,73 @@ public class Menu : MonoBehaviour
         main.SetActive(false);
         config.SetActive(true);
     }
+
+
+
+
+
+
+    public int howManyAirUnit;
+    public int howManyGroundUnit;
+
+    public int howManyAirEnnemiesUnit;
+    public int howManyGroundEnnemiesUnit;
+
+
+    #region NaughtyAttributes
+
+    [Button("------------------")]
+    void Separation2()
+    {
+        
+    }
+    
+    [Button()]
+    public void AjouterAllierAerien()
+    {
+        howManyAirUnit++;
+        //InstantiateAlliesFlock();
+    }
+    
+    [Button()]
+    public void AjouterAllierTerrestre()
+    {
+        howManyGroundUnit++;
+    }
+    [Button()]
+    public void RemoveAllAllies()
+    {
+        howManyAirUnit = 0;
+        howManyGroundUnit = 0;
+        
+    }
+
+
+    [Button("------------------")]
+    void Separation()
+    {
+        
+    }
+    
+    [Button()]
+    public void AjouterEnnemieAerien()
+    {
+        howManyAirEnnemiesUnit++;
+    }
+    
+    [Button()]
+    public void AjouterEnnemieTerrestre()
+    {
+        howManyGroundEnnemiesUnit++;
+    }
+    [Button()]
+    public void RemoveAllEnnemis()
+    {
+        howManyAirEnnemiesUnit = 0;
+        howManyGroundEnnemiesUnit = 0;
+    }
+
+    #endregion
+    
+    
 }
