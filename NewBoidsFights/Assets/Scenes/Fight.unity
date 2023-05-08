@@ -5935,15 +5935,15 @@ MonoBehaviour:
   isInGame: 1
   flock: {fileID: 3429564234414965306, guid: 4681877deea41254a986cedf2edfc20b, type: 3}
   howManyAlliesFlocks: 2
-  howManyAirUnit: 16
+  howManyAirUnit: 18
   howManyGroundUnit: 2
   currentFlock: 
-  currentFlockColor: 3
+  currentFlockColor: 1
   howManyEnnemiFlocks: 1
-  howManyAirEnnemiesUnit: 2
+  howManyAirEnnemiesUnit: 4
   howManyGroundEnnemiesUnit: 1
   currentFlockEnnemi: 
-  currentFlockEnnemiColor: 1
+  currentFlockEnnemiColor: 2
   WhereToSpawns: []
   count: 2
   countLocation: 0
