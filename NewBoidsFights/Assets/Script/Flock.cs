@@ -23,6 +23,7 @@ public class Flock : MonoBehaviour
     [Header("Flock Type")]
     [BoxGroup("Flock")]
     public FlockType currentFlock;
+    public FlockColor currentFlockColor;
     
     [Header("Flock State")]
     [BoxGroup("Flock")]
@@ -91,6 +92,7 @@ public class Flock : MonoBehaviour
     void Secure_SO()
     {
         centerRadius = radiusBehavior.center;
+
         if (isUnitEnnemy)
         {
             centerRadius = FlockManager.instance.WhereToSpawnsEnnemis[FlockManager.instance.countLocationEnnemy];
@@ -145,7 +147,7 @@ public class Flock : MonoBehaviour
         
         _SphereFlockSelection = GameObject.FindGameObjectWithTag("SphereIndication");
         
-        Invoke(nameof(ChooseColorFlock), 0.01f);
+        Invoke(nameof(InvokeColorChosing), 0.01f);
 
 
         switch (currentFlock)
@@ -216,8 +218,29 @@ public class Flock : MonoBehaviour
 
 
     #endregion
+
+
+    void InvokeColorChosing()
+    {
+        switch (currentFlockColor)
+        {
+            case FlockColor.Blue:
+                ChooseColorFlock(Color.blue);
+                break;
+            case FlockColor.Red:
+                ChooseColorFlock(Color.red);
+                break;
+            case FlockColor.Green:
+                ChooseColorFlock(Color.green);
+                break;
+            case FlockColor.Yellow:
+                ChooseColorFlock(Color.yellow);
+                break;
+        }
+    }
     
-    void ChooseColorFlock()
+    
+    void ChooseColorFlock(Color color)
     {
         /*
         Color color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
@@ -232,7 +255,7 @@ public class Flock : MonoBehaviour
         colorSelection.a = 0.05f;
         gameObject.transform.GetChild(0).GetComponentInChildren<Renderer>().material.color = colorSelection;*/
 
-        if (isUnitEnnemy)
+        /*if (isUnitEnnemy)
         {
             Color color = Color.red;
             foreach (FlockAgent agent in agents)
@@ -253,8 +276,15 @@ public class Flock : MonoBehaviour
             colorSelection = color;
             colorSelection.a = 0.1f;
             gameObject.transform.GetChild(0).GetComponentInChildren<Renderer>().material.color = colorSelection;
-        }
+        }*/
+        colorSelection = color;
+        colorSelection.a = 0.1f;
+        gameObject.transform.GetChild(0).GetComponentInChildren<Renderer>().material.color = colorSelection;
         
+        foreach (FlockAgent agent in agents)
+        {
+            agent.GetComponent<Renderer>().material.color = colorSelection;
+        }
     }
     
     void OnDrawGizmosSelected ()

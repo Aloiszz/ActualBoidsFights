@@ -8,6 +8,8 @@ using Random = UnityEngine.Random;
 
 public class FlockManager : MonoBehaviour
 {
+    [BoxGroup("General Settings Flocks")] 
+    public bool isInGame;
     [BoxGroup("General Settings Flocks")]
     public GameObject flock;
     
@@ -22,6 +24,8 @@ public class FlockManager : MonoBehaviour
     [HideInInspector] public int howManyGroundUnit; 
     [BoxGroup("General Settings Flocks")]
     public List<FlockType> currentFlock;
+    [BoxGroup("General Settings Flocks")]
+    public FlockColor currentFlockColor;
 
     [Space]
     [BoxGroup("General Settings Flocks")]
@@ -31,7 +35,8 @@ public class FlockManager : MonoBehaviour
     [HideInInspector] public int howManyGroundEnnemiesUnit; 
     [BoxGroup("General Settings Flocks")]
     public List<FlockType> currentFlockEnnemi;
-
+    [BoxGroup("General Settings Flocks")]
+    public FlockColor currentFlockEnnemiColor;
     
 
     [HideInInspector] public static float heightOfFlocks = 15;
@@ -59,9 +64,11 @@ public class FlockManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        
-        GetMenuValues(); // récup Info des menu de selection;
-        
+
+        if (isInGame)
+        {
+            GetMenuValues(); // récup Info des menu de selection;
+        }
     }
     void Start()
     {
@@ -89,17 +96,22 @@ public class FlockManager : MonoBehaviour
             howManyEnnemiFlocks = currentFlockEnnemi.Count;
         }*/
 
-        if (howManyAlliesFlocks == 0 && currentFlock.Count == 0)
-        {
-            howManyAlliesFlocks++;
-            currentFlock.Add(FlockType.Aerien);
-        }
 
-        if (howManyEnnemiFlocks == 0&& currentFlockEnnemi.Count == 0)
+        if (isInGame)
         {
-            howManyEnnemiFlocks++;
-            currentFlockEnnemi.Add(FlockType.Aerien);
+            if (howManyAlliesFlocks == 0 && currentFlock.Count == 0)
+            {
+                howManyAlliesFlocks++;
+                currentFlock.Add(FlockType.Aerien);
+            }
+
+            if (howManyEnnemiFlocks == 0&& currentFlockEnnemi.Count == 0)
+            {
+                howManyEnnemiFlocks++;
+                currentFlockEnnemi.Add(FlockType.Aerien);
+            }
         }
+        
         
         
         InstantiateAlliesFlock();
@@ -143,6 +155,7 @@ public class FlockManager : MonoBehaviour
             flockManager.GetComponent<Flock>().currentFlock = currentFlock[indexAllies];
             indexAllies++;
             flockManager.name = "Flock " + (count);
+            flockManager.GetComponent<Flock>().currentFlockColor = currentFlockColor;
         }
     }
 
@@ -158,6 +171,7 @@ public class FlockManager : MonoBehaviour
             flockManager.GetComponent<Flock>().currentFlock = currentFlockEnnemi[indexEnnemis];
             indexEnnemis++;
             flockManager.GetComponent<Flock>().isUnitEnnemy = true;
+            flockManager.GetComponent<Flock>().currentFlockColor = currentFlockEnnemiColor;
         }
     }
 
@@ -244,6 +258,14 @@ public enum FlockType
     Aerien,
     Terrestre,
     SousTerrain
+}
+
+public enum FlockColor
+{
+    Blue,
+    Red,
+    Green,
+    Yellow
 }
 
 

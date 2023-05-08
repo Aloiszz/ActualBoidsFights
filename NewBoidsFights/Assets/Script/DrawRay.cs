@@ -107,6 +107,16 @@ public class DrawRay : MonoBehaviour
                             Debug.DrawRay(ray.origin - new Vector3(0,-1,0) , ray.direction * 10000, Color.green, 1, false);
                             flock.transform.gameObject.GetComponent<Flock>().centerRadius = new Vector3(hit.point.x,  flock.transform.gameObject.GetComponent<Flock>().heightOfFlocks, hit.point.z); // Radius limite de la flock
                             flock.transform.transform.position = flock.transform.gameObject.GetComponent<Flock>().centerRadius;
+
+                            /*if (flock.GetComponent<Flock>().isUnitEnnemy == flock2.GetComponent<Flock>().isUnitEnnemy)
+                            {
+                                flock.transform.gameObject.GetComponent<Flock>().centerRadius = new Vector3(hit.point.x, flock2.transform.gameObject.GetComponent<Flock>().heightOfFlocks, hit.point.z); // Radius limite de la flock
+                                flock.transform.transform.position = flock.transform.gameObject.GetComponent<Flock>().centerRadius;
+                
+                                flock2.transform.gameObject.GetComponent<Flock>().centerRadius = new Vector3(hit.point.x, flock.transform.gameObject.GetComponent<Flock>().heightOfFlocks , hit.point.z); // Radius limite de la flock
+                                flock2.transform.transform.position = flock.transform.gameObject.GetComponent<Flock>().centerRadius;
+                            }*/
+                            
                             DeSelectUnit();
                         }
                     }
@@ -175,14 +185,29 @@ public class DrawRay : MonoBehaviour
         {
             if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Flock")) // Unit Selected
             {
+                
                 hit.transform.gameObject.GetComponent<Flock>().isUnitSelected = true;
                 flock2 = hit.transform.gameObject;
+
+                /*if (flock.GetComponent<Flock>().isUnitEnnemy == flock2.GetComponent<Flock>().isUnitEnnemy) // Verifi si Unit sont pote pour les assemblé dans une seule et meme flock
+                {
+                    Debug.Log("Assemblé");
+                    flock.transform.gameObject.GetComponent<Flock>().centerRadius = new Vector3(hit.point.x, flock2.transform.gameObject.GetComponent<Flock>().heightOfFlocks, hit.point.z); // Radius limite de la flock
+                    flock.transform.transform.position = flock.transform.gameObject.GetComponent<Flock>().centerRadius;
+                
+                    flock2.transform.gameObject.GetComponent<Flock>().centerRadius = new Vector3(hit.point.x, flock.transform.gameObject.GetComponent<Flock>().heightOfFlocks , hit.point.z); // Radius limite de la flock
+                    flock2.transform.transform.position = flock.transform.gameObject.GetComponent<Flock>().centerRadius;
+                }
+                else // Si unit sont ennemis
+                {
+                    
+                }*/
+                
                 Debug.DrawRay(ray.origin  - new Vector3(0,-1,0), ray.direction * 10000, Color.blue, 1, false);
                 
                 hit.transform.gameObject.GetComponent<Flock>().colorSelection.a = 0.2f;
                 hit.transform.transform.GetChild(0).GetComponentInChildren<Renderer>().material.color = hit.transform.gameObject.GetComponent<Flock>().colorSelection;
-                
-                
+                    
                 flock.transform.gameObject.GetComponent<Flock>().centerRadius = new Vector3(hit.point.x, flock.transform.gameObject.GetComponent<Flock>().heightOfFlocks, hit.point.z); // Radius limite de la flock
                 flock.transform.transform.position = flock.transform.gameObject.GetComponent<Flock>().centerRadius;
                 

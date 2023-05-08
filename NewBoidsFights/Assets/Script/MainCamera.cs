@@ -14,6 +14,7 @@ public class MainCamera : MonoBehaviour
     void Update()
     {
         Movement();
+        HandleMovement();
     }
 
 
@@ -34,6 +35,19 @@ public class MainCamera : MonoBehaviour
         if (Input.GetKey(KeyCode.DownArrow))
         {
             transform.Translate(Vector3.down * speed);
+        }
+    }
+    
+    void HandleMovement()
+    {
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            transform.Translate(Vector3.forward * speed);
+        }
+
+        if (Input.GetKey(KeyCode.LeftControl))
+        {
+            transform.Translate(Vector3.back * speed);
         }
     }
 }

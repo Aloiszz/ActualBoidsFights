@@ -181,6 +181,8 @@ MonoBehaviour:
   canon1: {fileID: 816434222012362555}
   canon2: {fileID: 816434221066111539}
   ammo: {fileID: 8106224990919001895, guid: 5263c0061305dcc4c99e77d9ede7982d, type: 3}
+  explosion: {fileID: 417761080263594737, guid: 7800b8f6b712bfe49bd663eeb3ebe1e4,
+    type: 3}
   HealtPoint: 50
   isEnnemy: 0
   isAttacking: 0

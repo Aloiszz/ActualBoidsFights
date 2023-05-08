@@ -5932,15 +5932,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fafdb7eeca1bd8d4c9eddf3c4f75eb7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInGame: 1
   flock: {fileID: 3429564234414965306, guid: 4681877deea41254a986cedf2edfc20b, type: 3}
-  howManyAlliesFlocks: 1
-  howManyAirUnit: 1
-  howManyGroundUnit: 0
+  howManyAlliesFlocks: 2
+  howManyAirUnit: 16
+  howManyGroundUnit: 2
   currentFlock: 
+  currentFlockColor: 3
   howManyEnnemiFlocks: 1
   howManyAirEnnemiesUnit: 2
-  howManyGroundEnnemiesUnit: 0
+  howManyGroundEnnemiesUnit: 1
   currentFlockEnnemi: 
+  currentFlockEnnemiColor: 1
   WhereToSpawns: []
   count: 2
   countLocation: 0

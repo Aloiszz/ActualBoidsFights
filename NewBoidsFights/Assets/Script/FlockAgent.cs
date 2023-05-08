@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
 using NaughtyAttributes;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
@@ -20,6 +21,7 @@ public class FlockAgent : MonoBehaviour
     [SerializeField] private Transform canon1;
     [SerializeField] private Transform canon2;
     [SerializeField] private GameObject ammo;
+    [SerializeField] private GameObject explosion;
 
 
     [Header("Information about Unit")] 
@@ -111,6 +113,7 @@ public class FlockAgent : MonoBehaviour
                         
                         if (hitData.collider.GetComponent<FlockAgent>().HealtPoint <= 0)
                         {
+                            Instantiate(explosion, hitData.transform.position, hitData.transform.rotation);
                             hitData.transform.gameObject.SetActive(false);
                             hitData.collider.GetComponent<FlockAgent>().whichFlockCameFrom.actualNumberOfAgent--;
                         }
@@ -128,6 +131,7 @@ public class FlockAgent : MonoBehaviour
                         hitData.collider.GetComponent<FlockAgent>().HealtPoint -= damage;
                         if (hitData.collider.GetComponent<FlockAgent>().HealtPoint <= 0)
                         {
+                            Instantiate(explosion, hitData.transform.position, hitData.transform.rotation);
                             hitData.transform.gameObject.SetActive(false);
                             hitData.collider.GetComponent<FlockAgent>().whichFlockCameFrom.actualNumberOfAgent--;
                         }

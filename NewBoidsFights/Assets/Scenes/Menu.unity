@@ -2653,7 +2653,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &689575219
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4592,31 +4592,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 09062dc0008857b46aaacdb7206f1453, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -73.07692
+      value: -117.3
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 09062dc0008857b46aaacdb7206f1453, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 12.725426
+      value: -9
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 09062dc0008857b46aaacdb7206f1453, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -50.99856
+      value: -59.6
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 09062dc0008857b46aaacdb7206f1453, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.548523
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 09062dc0008857b46aaacdb7206f1453, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 09062dc0008857b46aaacdb7206f1453, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0.8361355
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 09062dc0008857b46aaacdb7206f1453, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 09062dc0008857b46aaacdb7206f1453, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -113.469
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 09062dc0008857b46aaacdb7206f1453, type: 3}
@@ -5304,7 +5308,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1303748300
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8403,15 +8407,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fafdb7eeca1bd8d4c9eddf3c4f75eb7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInGame: 0
   flock: {fileID: 3429564234414965306, guid: 4681877deea41254a986cedf2edfc20b, type: 3}
   howManyAlliesFlocks: 1
-  howManyAirUnit: 1
+  howManyAirUnit: 3
   howManyGroundUnit: 0
-  currentFlock: 
+  currentFlock: 00000000
+  currentFlockColor: 0
   howManyEnnemiFlocks: 1
-  howManyAirEnnemiesUnit: 1
+  howManyAirEnnemiesUnit: 2
   howManyGroundEnnemiesUnit: 0
-  currentFlockEnnemi: 
+  currentFlockEnnemi: 00000000
+  currentFlockEnnemiColor: 2
   WhereToSpawns: []
   count: 2
   countLocation: 0
